@@ -7,4 +7,9 @@ package com.wecan.xhin.studio.api.post;
 public class BodyLogin {
     private String name;
     private String phone;
+
+    public BodyLogin(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
 }

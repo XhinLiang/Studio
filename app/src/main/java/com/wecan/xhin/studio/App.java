@@ -31,7 +31,6 @@ import com.wecan.xhin.studio.net.LoggingInterceptor;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -41,11 +40,9 @@ public class App extends Application {
 
     private final HashMap<Class, Object> apis = new HashMap<>();
 
-    private OkHttpClient okHttpClient;
-
     private Retrofit retrofit;
 
-    private static final String GANK_DATA = "http://gank.avosapps.com/";
+    private static final String BASE_URL = "";
 
     public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
@@ -55,30 +52,23 @@ public class App extends Application {
         if (application instanceof App) {
             return (App) application;
         } else {
-            throw new IllegalArgumentException("context must be from MrApplication");
+            throw new IllegalArgumentException("Context must be from Studio");
         }
     }
 
-    //返回支持的语言,格式化返回
-    private String buildAcceptLanguage() {
-        Locale locale = Locale.getDefault();
-        return String.format("%s-%s,%s;q=0.8,en-US;q=0.6,en;q=0.4",
-                locale.getLanguage(), locale.getCountry(), locale.getLanguage());
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        okHttpClient = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
 
         //OKHttp的使用
         okHttpClient.networkInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 return chain.proceed(chain.request().newBuilder()
-                        .header("Accept-Language", buildAcceptLanguage())
-                        .header("User-Agent", "")
+                        .header("version", BuildConfig.VERSION_NAME)
                         .build());
             }
         });
@@ -98,12 +88,8 @@ public class App extends Application {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(GANK_DATA)
+                .baseUrl(BASE_URL)
                 .build();
-    }
-
-    public OkHttpClient getOkHttpClient() {
-        return okHttpClient;
     }
 
     //返回Retrofit的API

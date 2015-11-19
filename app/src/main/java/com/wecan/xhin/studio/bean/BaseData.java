@@ -19,11 +19,37 @@
 
 package com.wecan.xhin.studio.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by drakeet on 8/9/15.
  * drakeet
  */
-public class BaseData {
+public class BaseData implements Parcelable {
+    public static final int VALUE_SUCCESS = 1;
+    public static final int VALUE_FAIL = 0;
+
     public int code;
     public String msg;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.code);
+        dest.writeString(this.msg);
+    }
+
+    public BaseData() {
+    }
+
+    protected BaseData(Parcel in) {
+        this.code = in.readInt();
+        this.msg = in.readString();
+    }
+
 }

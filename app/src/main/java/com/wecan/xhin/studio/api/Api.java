@@ -44,17 +44,17 @@ public interface Api {
     @POST("api/data/福利/" + 10 + "/{page}")
     Observable<LoginData> login(@Body BodyLogin bodyLogin);
 
-    @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<FellowData> getAllFellow();
-
-    @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<FellowData> getInRoomFellow();
-
     @POST("api/data/福利/" + 10 + "/{page}")
     Observable<FellowData> sign(@Body BodySign bodySign);
 
     @POST("api/data/福利/" + 10 + "/{page}")
     Observable<BaseData> changeUser(@Body User user);
+
+    @GET("api/data/福利/" + 10 + "/{page}")
+    Observable<FellowData> getAllFellow();
+
+    @GET("api/data/福利/" + 10 + "/{page}")
+    Observable<FellowData> getInRoomFellow();
 
 
 }

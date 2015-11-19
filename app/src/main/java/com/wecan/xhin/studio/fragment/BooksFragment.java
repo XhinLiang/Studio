@@ -9,13 +9,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.wecan.xhin.studio.R;
+import com.wecan.xhin.studio.bean.Book;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xhinliang on 15-11-18.
  * xhinliang@gmail.com
  */
 public class BooksFragment extends Fragment{
+    private static String KEY_BOOKS = "book";
 
+    public static FellowsFragment newInstance(List<Book> books) {
+        FellowsFragment fragment = new FellowsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(KEY_BOOKS, new ArrayList<>(books));
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Nullable
     @Override
