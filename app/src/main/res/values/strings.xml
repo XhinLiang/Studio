@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Studio</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="action_login">Sign in</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_phone">Phone</string>
+</resources>
