@@ -55,5 +55,6 @@ public interface Api {
 
     @POST("api/data/福利/" + 10 + "/{page}")
     Observable<BaseData> changeUser(@Body User user);
+    
 
 }
