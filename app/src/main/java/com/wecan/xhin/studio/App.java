@@ -42,7 +42,7 @@ public class App extends Application {
 
     private Retrofit retrofit;
 
-    private static final String BASE_URL = "";
+    private static final String BASE_URL = "http://rs.xidian.edu.cn/";
 
     public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 

@@ -17,4 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="LightToolbarThemeOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+            <item name="colorControlNormal">@color/text_dark</item>
+    </style>
+
 </resources>
