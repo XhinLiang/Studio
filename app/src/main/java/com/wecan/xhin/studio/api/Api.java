@@ -22,7 +22,7 @@ package com.wecan.xhin.studio.api;
 import com.wecan.xhin.studio.api.post.BodyLogin;
 import com.wecan.xhin.studio.api.post.BodySign;
 import com.wecan.xhin.studio.bean.BaseData;
-import com.wecan.xhin.studio.bean.FellowData;
+import com.wecan.xhin.studio.bean.UsersData;
 import com.wecan.xhin.studio.bean.LoginData;
 import com.wecan.xhin.studio.bean.MeizhiData;
 import com.wecan.xhin.studio.bean.User;
@@ -45,16 +45,16 @@ public interface Api {
     Observable<LoginData> login(@Body BodyLogin bodyLogin);
 
     @POST("api/data/福利/" + 10 + "/{page}")
-    Observable<FellowData> sign(@Body BodySign bodySign);
+    Observable<UsersData> sign(@Body BodySign bodySign);
 
     @POST("api/data/福利/" + 10 + "/{page}")
     Observable<BaseData> changeUser(@Body User user);
 
     @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<FellowData> getAllFellow();
+    Observable<UsersData> getAllUser();
 
     @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<FellowData> getInRoomFellow();
+    Observable<UsersData> getInRoomFellow();
 
 
 }

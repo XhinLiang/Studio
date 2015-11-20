@@ -15,7 +15,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.bean.FellowData;
+import com.wecan.xhin.studio.bean.UsersData;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
 import com.wecan.xhin.studio.fragment.BooksFragment;
 import com.wecan.xhin.studio.fragment.UsersFragment;
@@ -74,13 +74,13 @@ public class MainActivity extends RxAppCompatActivity {
 
     private void getFellows(){
         Api api = App.from(this).createApi(Api.class);
-        api.getAllFellow()
+        api.getAllUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<FellowData>bindToLifecycle())
-                .subscribe(new Action1<FellowData>() {
+                .compose(this.<UsersData>bindToLifecycle())
+                .subscribe(new Action1<UsersData>() {
                     @Override
-                    public void call(FellowData fellowData) {
+                    public void call(UsersData fellowData) {
 
                     }
                 });

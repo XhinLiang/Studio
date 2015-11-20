@@ -67,9 +67,6 @@
     	"msg": "请求成功",
     	"data": 
     	[
-            	      {
-            	       "group":"",
-            	       "fellow":
                     	    [
                     	    {
                         	    "name": "", //String
@@ -77,14 +74,11 @@
                             	"avatar": "url",//String
                             	"position": "1" //int
                             	"description": "" //String
+                            	"group": ""//int
                         	}，
                             {....},
                             {....}
-                            ]
-                       },
-                       {....},
-                       {....}
-                ]
+        ]
 }
 - 失败
 {       
@@ -105,23 +99,16 @@
     	"msg": "请求成功",
     	"data": 
     	[
-    	      {
-    	       "group":"",
-    	       "fellow":
-            	    [
-            	    {
-                	    "name": "", //String
-                    	"phone": "",//String
-                    	"avatar": "url",//String
-                    	"position": "1" //int
-                    	"description": "" //String
-                	}，
-                    {....},
-                    {....}
-                    ]
-               },
-               {....},
-               {....}
+                            	    {
+                                	    "name": "", //String
+                                    	"phone": "",//String
+                                    	"avatar": "url",//String
+                                    	"position": "1" //int
+                                    	"description": "" //String
+                                    	"group": ""//int
+                                	}，
+                                    {....},
+                                    {....}
         ]
 }
 - 失败
