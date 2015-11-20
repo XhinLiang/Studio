@@ -18,7 +18,7 @@ import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.FellowData;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
 import com.wecan.xhin.studio.fragment.BooksFragment;
-import com.wecan.xhin.studio.fragment.FellowsFragment;
+import com.wecan.xhin.studio.fragment.UsersFragment;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -31,7 +31,7 @@ public class MainActivity extends RxAppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private FellowsFragment inRoomFellowsFragment, allFellowFragment;
+    private UsersFragment inRoomFellowsFragment, allFellowFragment;
     private BooksFragment booksFragment;
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends RxAppCompatActivity {
         binding.navView.setCheckedItem(R.id.in_room);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        inRoomFellowsFragment = new FellowsFragment();
+        inRoomFellowsFragment = new UsersFragment();
         transaction.add(R.id.fl_content, inRoomFellowsFragment);
         transaction.commit();
 
@@ -92,7 +92,7 @@ public class MainActivity extends RxAppCompatActivity {
             case R.id.in_room:
                 hideFragments(transaction);
                 if (inRoomFellowsFragment == null) {
-                    inRoomFellowsFragment = new FellowsFragment();
+                    inRoomFellowsFragment = new UsersFragment();
                     transaction.add(R.id.fl_content, inRoomFellowsFragment);
                     break;
                 }
@@ -110,7 +110,7 @@ public class MainActivity extends RxAppCompatActivity {
             case R.id.all_fellow:
                 hideFragments(transaction);
                 if (allFellowFragment == null) {
-                    allFellowFragment = new FellowsFragment();
+                    allFellowFragment = new UsersFragment();
                     transaction.add(R.id.fl_content, allFellowFragment);
                     break;
                 }

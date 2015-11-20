@@ -21,8 +21,8 @@ import java.util.List;
 public class BooksFragment extends Fragment{
     private static String KEY_BOOKS = "book";
 
-    public static FellowsFragment newInstance(List<Book> books) {
-        FellowsFragment fragment = new FellowsFragment();
+    public static UsersFragment newInstance(List<Book> books) {
+        UsersFragment fragment = new UsersFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(KEY_BOOKS, new ArrayList<>(books));
         fragment.setArguments(bundle);

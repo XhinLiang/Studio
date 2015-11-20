@@ -12,9 +12,54 @@ public class User implements Parcelable {
     private String phone;
     private String avatar;
     private int position;
-    private String decription;
+    private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
+    }
 
     @Override
+
     public int describeContents() {
         return 0;
     }
@@ -25,7 +70,7 @@ public class User implements Parcelable {
         dest.writeString(this.phone);
         dest.writeString(this.avatar);
         dest.writeInt(this.position);
-        dest.writeString(this.decription);
+        dest.writeString(this.description);
     }
 
     public User() {
@@ -36,7 +81,7 @@ public class User implements Parcelable {
         this.phone = in.readString();
         this.avatar = in.readString();
         this.position = in.readInt();
-        this.decription = in.readString();
+        this.description = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
