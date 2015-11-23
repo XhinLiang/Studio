@@ -19,42 +19,51 @@
 package com.wecan.xhin.studio.api;
 
 
-import com.wecan.xhin.studio.api.post.BodyLogin;
-import com.wecan.xhin.studio.api.post.BodySign;
-import com.wecan.xhin.studio.bean.BaseData;
-import com.wecan.xhin.studio.bean.UsersData;
-import com.wecan.xhin.studio.bean.LoginData;
 import com.wecan.xhin.studio.bean.MeizhiData;
-import com.wecan.xhin.studio.bean.User;
+import com.wecan.xhin.studio.bean.down.UsersData;
+import com.wecan.xhin.studio.bean.common.User;
+import com.wecan.xhin.studio.bean.down.BaseData;
+import com.wecan.xhin.studio.bean.up.RegisterBody;
+import com.wecan.xhin.studio.bean.up.SignBody;
+
+import java.util.Map;
 
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
+import retrofit.http.QueryMap;
 import rx.Observable;
 
 public interface Api {
 
+    String BASE_URL = "";
+
     @GET("api/data/福利/" + 10 + "/{page}")
     Observable<MeizhiData> getMeizhiData(@Path("page") int page);
 
-    @POST("api/data/福利/" + 10 + "/{page}")
-    Observable<BaseData> register(@Body User user);
+    @GET("api/users")
+    Observable<User> login(@QueryMap Map<String,String> user);
 
-    @POST("api/data/福利/" + 10 + "/{page}")
-    Observable<LoginData> login(@Body BodyLogin bodyLogin);
+    @POST("api/users")
+    Observable<BaseData> register(@Body RegisterBody registerUser);
 
-    @POST("api/data/福利/" + 10 + "/{page}")
-    Observable<UsersData> sign(@Body BodySign bodySign);
+    @PUT("api/users")
+    Observable<User> updateUser(@Body User updateUser);
 
-    @POST("api/data/福利/" + 10 + "/{page}")
-    Observable<BaseData> changeUser(@Body User user);
+    @POST("api/sign")
+    Observable<BaseData> sign(@Body SignBody user);
 
-    @GET("api/data/福利/" + 10 + "/{page}")
+    @DELETE("api/sign")
+    Observable<BaseData> unsign(@Body SignBody user);
+
+    @GET("/api/message_all")
     Observable<UsersData> getAllUser();
 
-    @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<UsersData> getInRoomFellow();
+    @GET("/api/message")
+    Observable<UsersData> getSignedUser();
 
 
 }

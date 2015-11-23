@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.trello.rxlifecycle.components.support.RxFragment;
 import com.wecan.xhin.studio.activity.UserDetailsActivity;
 import com.wecan.xhin.studio.adapter.UsersAdapter;
-import com.wecan.xhin.studio.bean.User;
+import com.wecan.xhin.studio.bean.common.User;
 
 /**
  * Created by xhinliang on 15-11-18.

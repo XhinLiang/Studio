@@ -21,6 +21,7 @@ package com.wecan.xhin.studio.bean;
 
 
 import com.wecan.xhin.studio.api.Meizhi;
+import com.wecan.xhin.studio.bean.down.BaseData;
 
 import java.util.List;
 

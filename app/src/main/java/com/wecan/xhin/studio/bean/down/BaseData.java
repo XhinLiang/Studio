@@ -17,39 +17,17 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wecan.xhin.studio.bean;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.wecan.xhin.studio.bean.down;
 
 /**
  * Created by drakeet on 8/9/15.
  * drakeet
  */
-public class BaseData implements Parcelable {
+public class BaseData {
     public static final int VALUE_SUCCESS = 1;
     public static final int VALUE_FAIL = 0;
 
-    public int code;
-    public String msg;
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.code);
-        dest.writeString(this.msg);
-    }
-
-    public BaseData() {
-    }
-
-    protected BaseData(Parcel in) {
-        this.code = in.readInt();
-        this.msg = in.readString();
-    }
+    public int status;
+    public String message;
 
 }

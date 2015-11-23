@@ -12,26 +12,24 @@ import android.view.MenuItem;
 import com.jakewharton.rxbinding.support.design.widget.RxNavigationView;
 import com.jakewharton.rxbinding.support.v4.widget.RxDrawerLayout;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
-import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.bean.UsersData;
+import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
+import com.wecan.xhin.studio.databinding.NavHeaderMainBinding;
+import com.wecan.xhin.studio.fragment.AllUserFragment;
 import com.wecan.xhin.studio.fragment.BooksFragment;
+import com.wecan.xhin.studio.fragment.SignedUserFragment;
 import com.wecan.xhin.studio.fragment.UsersFragment;
 
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends RxAppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    public static final String KEY_USER = "user";
 
     private ActivityMainBinding binding;
-
-    private UsersFragment inRoomFellowsFragment, allFellowFragment;
+    private UsersFragment signedUserFragment, allFellowFragment;
     private BooksFragment booksFragment;
 
     @Override
@@ -39,6 +37,10 @@ public class MainActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(binding.toolbar);
+
+        NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.getBinding(binding.navView);
+        User user = getIntent().getParcelableExtra(KEY_USER);
+        navHeaderMainBinding.setUser(user);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout,
                 binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -62,28 +64,15 @@ public class MainActivity extends RxAppCompatActivity {
                                 .call(false);
                     }
                 });
-
-        binding.navView.setCheckedItem(R.id.in_room);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        inRoomFellowsFragment = new UsersFragment();
-        transaction.add(R.id.fl_content, inRoomFellowsFragment);
-        transaction.commit();
-
+        initNavigationSelection();
     }
 
-    private void getFellows(){
-        Api api = App.from(this).createApi(Api.class);
-        api.getAllUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<UsersData>bindToLifecycle())
-                .subscribe(new Action1<UsersData>() {
-                    @Override
-                    public void call(UsersData fellowData) {
-
-                    }
-                });
+    private void initNavigationSelection() {
+        binding.navView.setCheckedItem(R.id.in_room);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        signedUserFragment = SignedUserFragment.newInstance();
+        transaction.add(R.id.fl_content, signedUserFragment);
+        transaction.commit();
     }
 
     private void setTabSelection(int itemId) {
@@ -91,12 +80,12 @@ public class MainActivity extends RxAppCompatActivity {
         switch (itemId) {
             case R.id.in_room:
                 hideFragments(transaction);
-                if (inRoomFellowsFragment == null) {
-                    inRoomFellowsFragment = new UsersFragment();
-                    transaction.add(R.id.fl_content, inRoomFellowsFragment);
+                if (signedUserFragment == null) {
+                    signedUserFragment = SignedUserFragment.newInstance();
+                    transaction.add(R.id.fl_content, signedUserFragment);
                     break;
                 }
-                transaction.show(inRoomFellowsFragment);
+                transaction.show(signedUserFragment);
                 break;
             case R.id.book:
                 hideFragments(transaction);
@@ -110,7 +99,7 @@ public class MainActivity extends RxAppCompatActivity {
             case R.id.all_fellow:
                 hideFragments(transaction);
                 if (allFellowFragment == null) {
-                    allFellowFragment = new UsersFragment();
+                    allFellowFragment = AllUserFragment.newInstance();
                     transaction.add(R.id.fl_content, allFellowFragment);
                     break;
                 }
@@ -126,8 +115,8 @@ public class MainActivity extends RxAppCompatActivity {
 
 
     private void hideFragments(FragmentTransaction transaction) {
-        if (inRoomFellowsFragment != null) {
-            transaction.hide(inRoomFellowsFragment);
+        if (signedUserFragment != null) {
+            transaction.hide(signedUserFragment);
         }
         if (allFellowFragment != null) {
             transaction.hide(allFellowFragment);
@@ -142,9 +131,9 @@ public class MainActivity extends RxAppCompatActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+            return;
         }
+        super.onBackPressed();
     }
 
     @Override

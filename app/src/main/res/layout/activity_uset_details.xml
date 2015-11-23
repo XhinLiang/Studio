@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="com.wecan.xhin.studio.bean.User" />
+            type="com.wecan.xhin.studio.bean.common.User" />
 
     </data>
 

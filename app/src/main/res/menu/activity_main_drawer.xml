@@ -5,28 +5,28 @@
         <item
             android:id="@+id/in_room"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="@string/sign_user" />
         <item
-            android:id="@+id/all_fellow"
+            android:id="@+id/all_user"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="@string/all_user" />
         <item
             android:id="@+id/book"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="@string/books" />
     </group>
 
-    <item android:title="System">
+    <item android:title="@string/system">
         <menu>
             <item
                 android:id="@+id/me"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Tools" />
+                android:title="@string/me" />
 
             <item
                 android:id="@+id/about"
                 android:icon="@drawable/ic_menu_send"
-                android:title="About" />
+                android:title="@string/about" />
         </menu>
     </item>
 

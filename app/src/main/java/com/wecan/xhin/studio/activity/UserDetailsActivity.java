@@ -8,7 +8,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.wecan.xhin.studio.R;
-import com.wecan.xhin.studio.bean.User;
+import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityUsetDetailsBinding;
 
 import java.util.concurrent.TimeUnit;

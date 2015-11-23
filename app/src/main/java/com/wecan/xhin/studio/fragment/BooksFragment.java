@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.wecan.xhin.studio.R;
-import com.wecan.xhin.studio.bean.Book;
 
 import java.util.ArrayList;
 import java.util.List;

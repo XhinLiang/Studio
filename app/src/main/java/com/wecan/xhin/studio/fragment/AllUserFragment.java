@@ -2,7 +2,7 @@ package com.wecan.xhin.studio.fragment;
 
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.bean.UsersData;
+import com.wecan.xhin.studio.bean.down.UsersData;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -12,11 +12,10 @@ import rx.schedulers.Schedulers;
  * Created by xhinliang on 15-11-20.
  * xhinliang@gmail.com
  */
-public class AllFellowFragment extends UsersFragment {
+public class AllUserFragment extends UsersFragment {
 
-    public static AllFellowFragment newInstance() {
-        AllFellowFragment fragment = new AllFellowFragment();
-        return fragment;
+    public static AllUserFragment newInstance() {
+        return new AllUserFragment();
     }
 
     @Override

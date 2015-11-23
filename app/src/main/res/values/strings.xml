@@ -8,7 +8,7 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="action_login">Sign in</string>
+    <string name="action_login">Login</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_phone">Phone</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -102,4 +102,21 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="nothing" />
+    <string name="code">Code</string>
+    <string name="register">Register</string>
+    <string name="succeed">Succeed!</string>
+    <string name="position_no_selected">职位未选择</string>
+    <string name="sex_no_selected">性别未选择</string>
+    <string name="group_no_selected">组别未选择</string>
+    <string name="name_no_input">Name is Empty</string>
+    <string name="phone_no_input">Phone is Empty</string>
+    <string name="code_no_input">Code is Empty</string>
+    <string name="name_example">Android Studio</string>
+    <string name="email_example">android.studio@android.com</string>
+    <string name="sign_user">Sign User</string>
+    <string name="all_user">All User</string>
+    <string name="books">Books</string>
+    <string name="system">System</string>
+    <string name="me">Me</string>
+    <string name="about">About</string>
 </resources>

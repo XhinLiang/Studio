@@ -1,4 +1,6 @@
-package com.wecan.xhin.studio.bean;
+package com.wecan.xhin.studio.bean.down;
+
+import com.wecan.xhin.studio.bean.common.User;
 
 import java.util.List;
 
@@ -7,5 +9,5 @@ import java.util.List;
  * xhinliang@gmail.com
  */
 public class UsersData extends BaseData {
-    public List<GroupData> data;
+    public List<User> data;
 }

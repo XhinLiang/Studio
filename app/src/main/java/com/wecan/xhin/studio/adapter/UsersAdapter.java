@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.wecan.xhin.studio.bean.User;
+import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.RecyclerItemUserBinding;
 import com.wecan.xhin.studio.rx.BindingRecyclerView;
 
@@ -38,7 +38,7 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
         holder.binding.executePendingBindings();
 
 
-        setupImage(holder.binding.ivAvatar, item.getAvatar());
+        setupImage(holder.binding.ivAvatar, item.imgurl);
 
         holder.itemView.setTag(item);
     }

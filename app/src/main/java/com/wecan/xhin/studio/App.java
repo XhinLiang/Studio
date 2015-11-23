@@ -38,12 +38,15 @@ import retrofit.RxJavaCallAdapterFactory;
 
 public class App extends Application {
 
+
+    public static final String KEY_PREFERENCE_USER = "user";
+    public static final String KEY_PREFERENCE_PHONE = "phone";
+
     private final HashMap<Class, Object> apis = new HashMap<>();
 
     private Retrofit retrofit;
 
     private static final String BASE_URL = "http://rs.xidian.edu.cn/";
-
     public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     //返回当前单例的静态方法,判断是否是当前的App调用
