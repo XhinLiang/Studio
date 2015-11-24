@@ -12,10 +12,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:elevation="1dp"
-        android:foreground="?selectableItemBackground"
-        tools:ignore="UnusedAttribute">
+        android:background="@color/background"
+        android:foreground="?selectableItemBackground">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/light_grey" />
 
         <TextView
             android:id="@+id/name"
@@ -30,9 +34,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="#20000000" />
+            android:background="@color/light_grey" />
 
     </FrameLayout>
 

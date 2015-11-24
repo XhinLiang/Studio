@@ -40,11 +40,11 @@ public class BaseActivity extends RxAppCompatActivity {
                 .show();
     }
 
-    public class SelectedFilter implements Func1<ViewClickEvent, Boolean> {
+    public class SpinnerFilter implements Func1<ViewClickEvent, Boolean> {
         AppCompatSpinner spinner;
         int messageRes;
 
-        public SelectedFilter(AppCompatSpinner spinner, int messageRes) {
+        public SpinnerFilter(AppCompatSpinner spinner, int messageRes) {
             this.spinner = spinner;
             this.messageRes = messageRes;
         }
@@ -59,11 +59,11 @@ public class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-    public class InputFilter implements Func1<ViewClickEvent, Boolean> {
+    public class EditTextFilter implements Func1<ViewClickEvent, Boolean> {
         EditText editText;
         int messageRes;
 
-        public InputFilter(EditText editText, int messageRes) {
+        public EditTextFilter(EditText editText, int messageRes) {
             this.editText = editText;
             this.messageRes = messageRes;
         }

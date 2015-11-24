@@ -59,7 +59,6 @@ public class RxNetworking {
 
     public static <T> Observable.Transformer<T, T> bindConnecting(final ProgressDialog pd) {
         return new Observable.Transformer<T, T>() {
-            //类似装饰者模式
             @Override
             public Observable<T> call(Observable<T> original) {
                 return original.doOnSubscribe(new Action0() {

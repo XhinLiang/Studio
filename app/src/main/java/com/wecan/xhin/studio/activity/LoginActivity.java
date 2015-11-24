@@ -1,6 +1,7 @@
 package com.wecan.xhin.studio.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,8 +59,8 @@ public class LoginActivity extends BaseActivity {
                 .compose(networkingIndicator);
 
         setRxClick(binding.btnLogin)
-                .filter(new InputFilter(binding.etName, R.string.name_no_input))
-                .filter(new InputFilter(binding.etPhone, R.string.phone_no_input))
+                .filter(new EditTextFilter(binding.etName, R.string.name_no_input))
+                .filter(new EditTextFilter(binding.etPhone, R.string.phone_no_input))
                 .flatMap(new Func1<ViewClickEvent, Observable<User>>() {
                     @Override
                     public Observable<User> call(ViewClickEvent viewClickEvent) {
@@ -68,12 +69,13 @@ public class LoginActivity extends BaseActivity {
                 })
                 .subscribe(new Action1<User>() {
                     @Override
-                    public void call(User meizhiData) {
+                    public void call(User user) {
                         PreferenceHelper.getInstance(LoginActivity.this)
                                 .saveParam(App.KEY_PREFERENCE_USER, binding.etName.getText().toString());
                         PreferenceHelper.getInstance(LoginActivity.this)
                                 .saveParam(App.KEY_PREFERENCE_PHONE, binding.etPhone.getText().toString());
-                        Log.d(TAG, meizhiData.toString());
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                                .putExtra(MainActivity.KEY_USER, user));
                     }
                 }, new Action1<Throwable>() {
                     @Override

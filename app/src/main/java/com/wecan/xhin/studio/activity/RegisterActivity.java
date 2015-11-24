@@ -38,12 +38,12 @@ public class RegisterActivity extends BaseActivity {
         RxView.clickEvents(binding.btnRegister)
                 .compose(this.<ViewClickEvent>bindToLifecycle())
                 .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms
-                .filter(new SelectedFilter(binding.acpGroupName, R.string.group_no_selected))
-                .filter(new SelectedFilter(binding.acpSex,R.string.sex_no_selected))
-                .filter(new SelectedFilter(binding.acpPosition,R.string.position_no_selected))
-                .filter(new InputFilter(binding.etName,R.string.name_no_input))
-                .filter(new InputFilter(binding.etPhone,R.string.phone_no_input))
-                .filter(new InputFilter(binding.etCode,R.string.code_no_input))
+                .filter(new SpinnerFilter(binding.acpGroupName, R.string.group_no_selected))
+                .filter(new SpinnerFilter(binding.acpSex,R.string.sex_no_selected))
+                .filter(new SpinnerFilter(binding.acpPosition,R.string.position_no_selected))
+                .filter(new EditTextFilter(binding.etName,R.string.name_no_input))
+                .filter(new EditTextFilter(binding.etPhone,R.string.phone_no_input))
+                .filter(new EditTextFilter(binding.etCode,R.string.code_no_input))
                 .compose(new Observable.Transformer<ViewClickEvent, BaseData>() {
                     @Override
                     public Observable<BaseData> call(Observable<ViewClickEvent> viewClickEventObservable) {
