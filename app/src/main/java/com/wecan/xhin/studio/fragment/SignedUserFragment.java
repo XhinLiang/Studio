@@ -1,5 +1,6 @@
 package com.wecan.xhin.studio.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
@@ -31,8 +32,12 @@ public class SignedUserFragment extends UsersFragment {
     private User user;
     private Observable<BaseData> observableSign;
 
-    public static SignedUserFragment newInstance() {
-        return new SignedUserFragment();
+    public static SignedUserFragment newInstance(User user) {
+        SignedUserFragment fragment = new SignedUserFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_USER, user);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

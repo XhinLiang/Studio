@@ -3,6 +3,7 @@ package com.wecan.xhin.studio.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.AppCompatSpinner;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -89,6 +90,17 @@ public class BaseActivity extends RxAppCompatActivity {
                 return false;
             }
             return true;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

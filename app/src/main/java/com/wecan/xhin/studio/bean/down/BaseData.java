@@ -24,10 +24,5 @@ package com.wecan.xhin.studio.bean.down;
  * drakeet
  */
 public class BaseData {
-    public static final int VALUE_SUCCESS = 1;
-    public static final int VALUE_FAIL = 0;
-
     public int status;
-    public String message;
-
 }

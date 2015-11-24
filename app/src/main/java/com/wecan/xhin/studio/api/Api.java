@@ -25,22 +25,21 @@ import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.bean.up.SignBody;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
-import retrofit.http.QueryMap;
+import retrofit.http.Query;
 import rx.Observable;
 
 public interface Api {
 
-    String BASE_URL = "http://192.168.1.180";
+    String BASE_URL = "http://192.168.1.180/RestFulApi/index.php/";
 
     @GET("api/users")
-    Observable<User> login(@QueryMap Map<String,String> user);
+    Observable<User> login(@Query("name") String name, @Query("phone") String phone);
 
     @POST("api/users")
     Observable<BaseData> register(@Body RegisterBody registerUser);

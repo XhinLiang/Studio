@@ -3,6 +3,7 @@ package com.wecan.xhin.studio.activity;
 import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
@@ -57,7 +58,8 @@ public class RegisterActivity extends BaseActivity {
                                 , binding.acpGroupName.getSelectedItemPosition()
                                 , binding.etPhone.getText().toString().trim()
                                 , binding.acpSex.getSelectedItemPosition()
-                                , binding.etName.getText().toString().trim()));
+                                , binding.etName.getText().toString().trim()
+                                , binding.etCode.getText().toString().trim()));
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -84,11 +86,13 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void call(BaseData user) {
                         showSimpleDialog(R.string.succeed);
+                        Log.d("Register", "succ");
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         showSimpleDialog(throwable.getMessage());
+                        Log.d("Register", throwable.getMessage());
                     }
                 });
     }

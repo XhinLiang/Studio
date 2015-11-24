@@ -1,9 +1,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.MainActivity">
 
-    <data />
+    <data>
+
+        <variable
+            name="user"
+            type="com.wecan.xhin.studio.bean.common.User" />
+
+    </data>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -34,9 +41,9 @@
 
             <FrameLayout
                 android:id="@+id/fl_content"
-                android:layout_marginTop="?attr/actionBarSize"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize" />
 
         </android.support.design.widget.CoordinatorLayout>
 
@@ -47,7 +54,9 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/include_nav_header_main"
-            app:menu="@menu/activity_main_drawer" />
+            app:menu="@menu/activity_main_drawer">
+
+        </android.support.design.widget.NavigationView>
 
     </android.support.v4.widget.DrawerLayout>
 </layout>

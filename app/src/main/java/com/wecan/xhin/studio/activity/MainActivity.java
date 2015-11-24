@@ -3,6 +3,7 @@ package com.wecan.xhin.studio.activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,10 +16,8 @@ import com.jakewharton.rxbinding.support.v4.widget.RxDrawerLayout;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
-import com.wecan.xhin.studio.databinding.IncludeNavHeaderMainBinding;
 import com.wecan.xhin.studio.fragment.AllUserFragment;
-import com.wecan.xhin.studio.fragment.SignedUserFragment;
-import com.wecan.xhin.studio.fragment.UsersFragment;
+import com.wecan.xhin.studio.fragment.TestFragment;
 
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -28,8 +27,7 @@ public class MainActivity extends BaseActivity {
     public static final String KEY_USER = "user";
 
     private ActivityMainBinding binding;
-    private UsersFragment signedUserFragment, allFellowFragment;
-    private UsersFragment booksFragment;
+    private Fragment signedUserFragment, allFellowFragment, booksFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +35,13 @@ public class MainActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(binding.toolbar);
 
-        IncludeNavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.getBinding(binding.navView);
         User user = getIntent().getParcelableExtra(KEY_USER);
-        navHeaderMainBinding.setUser(user);
+        binding.setUser(user);
+
+//        IncludeNavHeaderMainBinding navHeaderMainBinding = DataBindingUtil
+//                .inflate(getLayoutInflater(), R.layout.include_nav_header_main, null, false);
+//        User user = getIntent().getParcelableExtra(KEY_USER);
+//        navHeaderMainBinding.setUser(user);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout,
                 binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -69,7 +71,7 @@ public class MainActivity extends BaseActivity {
     private void initNavigationSelection() {
         binding.navView.setCheckedItem(R.id.signed_user);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        signedUserFragment = SignedUserFragment.newInstance();
+        signedUserFragment = AllUserFragment.newInstance();
         transaction.add(R.id.fl_content, signedUserFragment);
         transaction.commit();
     }
@@ -80,7 +82,7 @@ public class MainActivity extends BaseActivity {
             case R.id.signed_user:
                 hideFragments(transaction);
                 if (signedUserFragment == null) {
-                    signedUserFragment = SignedUserFragment.newInstance();
+                    signedUserFragment = new TestFragment();
                     transaction.add(R.id.fl_content, signedUserFragment);
                     break;
                 }
@@ -89,7 +91,7 @@ public class MainActivity extends BaseActivity {
             case R.id.book:
                 hideFragments(transaction);
                 if (booksFragment == null) {
-                    booksFragment = SignedUserFragment.newInstance();
+                    booksFragment = new TestFragment();
                     transaction.add(R.id.fl_content, booksFragment);
                     break;
                 }
@@ -98,7 +100,7 @@ public class MainActivity extends BaseActivity {
             case R.id.all_user:
                 hideFragments(transaction);
                 if (allFellowFragment == null) {
-                    allFellowFragment = AllUserFragment.newInstance();
+                    allFellowFragment = new TestFragment();
                     transaction.add(R.id.fl_content, allFellowFragment);
                     break;
                 }

@@ -15,9 +15,6 @@ import com.wecan.xhin.studio.databinding.ActivityLoginBinding;
 import com.wecan.xhin.studio.rx.RxNetworking;
 import com.wecan.xhin.studio.util.PreferenceHelper;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -49,9 +46,7 @@ public class LoginActivity extends BaseActivity {
                 .defer(new Func0<Observable<User>>() {
                     @Override
                     public Observable<User> call() {
-                        Map<String, String> map = new HashMap<>();
-                        map.put(binding.etName.getText().toString(), binding.etPhone.getText().toString());
-                        return api.login(map);
+                        return api.login(binding.etName.getText().toString(), binding.etPhone.getText().toString());
                     }
                 })
                 .subscribeOn(Schedulers.io())

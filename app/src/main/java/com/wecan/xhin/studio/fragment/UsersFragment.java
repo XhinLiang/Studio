@@ -56,14 +56,15 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users, container, true);
         users = new ObservableArrayList<>();
         binding.rvUsers.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
-        setFabVisibility(binding.fabSign);
-
+        
         errorAction = new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
                 Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
+
+        setFabVisibility(binding.fabSign);
 
         Observable.Transformer<List<User>, List<User>> networkingIndicator =
                 RxNetworking.bindRefreshing(binding.srlRefresh);

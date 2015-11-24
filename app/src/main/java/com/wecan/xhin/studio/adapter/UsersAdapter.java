@@ -20,7 +20,7 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
     private RequestManager requestManager;
 
 
-    public UsersAdapter(Context context, ObservableList<User> data, Listener listener,RequestManager requestManager) {
+    public UsersAdapter(Context context, ObservableList<User> data, Listener listener, RequestManager requestManager) {
         super(context, data);
         this.listener = listener;
         this.requestManager = requestManager;
@@ -46,6 +46,8 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
     }
 
     private void setupImage(ImageView image, String imageUrl) {
+        if (imageUrl == null || imageUrl.length() == 0)
+            return;
         requestManager.load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(image);
