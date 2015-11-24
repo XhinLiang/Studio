@@ -119,4 +119,12 @@
     <string name="system">System</string>
     <string name="me">Me</string>
     <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="give_me_star">Give Me Star!</string>
+    <string name="thanks_to">Thanks To</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="group">Group</string>
+    <string name="position">Position</string>
+    <string name="description">Description</string>
 </resources>

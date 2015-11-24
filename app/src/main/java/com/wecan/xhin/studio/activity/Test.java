@@ -1,9 +1,11 @@
 package com.wecan.xhin.studio.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.api.Meizhi;
@@ -19,7 +21,7 @@ import rx.schedulers.Schedulers;
  * Created by xhinliang on 15-11-19.
  * xhinliang@gmail.com
  */
-public class Test extends AppCompatActivity {
+public class Test extends BaseActivity {
 
     private static final String TAG = "test";
 
@@ -27,6 +29,19 @@ public class Test extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        api();
+        Button button = new Button(this);
+        setContentView(button);
+        setRxClick(button)
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        Toast.makeText(Test.this, "Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void api() {
         Api api;
         api = App.from(this).createApi(Api.class);
 

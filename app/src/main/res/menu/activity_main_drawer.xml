@@ -3,7 +3,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/in_room"
+            android:id="@+id/signed_user"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/sign_user" />
         <item

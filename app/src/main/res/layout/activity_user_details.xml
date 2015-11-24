@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.wecan.xhin.studio.bean.common.User" />
+
+        <variable
+            name="user"
+            type="User" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".activity.UserDetailsActivity">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax">
+
+                    <ImageView
+                        android:id="@+id/ivPicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/nothing"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/header" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".activity.UserDetailsActivity"
+            tools:showIn="@layout/activity_user_details">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/mrl_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrl_rippleColor="?attr/colorPrimary"
+                    app:mrl_rippleOverlay="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@{user.name}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="20sp"
+                            tools:text="@string/give_me_star" />
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/mrl_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrl_rippleColor="?attr/colorPrimary"
+                    app:mrl_rippleOverlay="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/phone" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@{user.phone}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="20sp"
+                            tools:text="@string/give_me_star" />
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/mrl_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrl_rippleColor="?attr/colorPrimary"
+                    app:mrl_rippleOverlay="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/group" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@{User.getGroupName(user.group_name)}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="20sp"
+                            tools:text="@string/give_me_star" />
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/mrl_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrl_rippleColor="?attr/colorPrimary"
+                    app:mrl_rippleOverlay="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/position" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@{User.getPositionName(user.position)}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="20sp"
+                            tools:text="@string/give_me_star" />
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/mrl_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mrl_rippleColor="?attr/colorPrimary"
+                    app:mrl_rippleOverlay="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/description" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@{user.description}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="20sp"
+                            tools:text="@string/give_me_star" />
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_dialog_email"
+            app:layout_anchor="@id/app_bar"
+            app:layout_anchorGravity="bottom|end" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

@@ -18,16 +18,26 @@ public class User implements Parcelable {
     public String status;	/*0*/
     public String name;	/*wer123*/
     public String imgurl;	/*www.123456.com*/
-
     public String description;
 
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public static String getGroupName(int group){
+        return "SS";
     }
+
+    public static String getPositionName(int position){
+        return "SS";
+    }
+
+    public static String getSexName(int sex){
+        return "SS";
+    }
+
+
+
 
     @Override
     public int describeContents() {

@@ -6,19 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.RecyclerItemUserBinding;
 import com.wecan.xhin.studio.rx.BindingRecyclerView;
 
 public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAdapter.ViewHolder> {
 
-    private final Listener listener;
+    private Listener listener;
 
 
-    public UsersAdapter(Context context, ObservableList<User> data, Listener listener) {
+    private RequestManager requestManager;
+
+
+    public UsersAdapter(Context context, ObservableList<User> data, Listener listener,RequestManager requestManager) {
         super(context, data);
         this.listener = listener;
+        this.requestManager = requestManager;
         setHasStableIds(true);
     }
 
@@ -30,23 +35,20 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         User item = data.get(position);
-
         holder.binding.setUser(item);
 
         // execute the binding immediately to ensure
         // the original size of RatioImageView is set before layout
         holder.binding.executePendingBindings();
 
-
         setupImage(holder.binding.ivAvatar, item.imgurl);
-
         holder.itemView.setTag(item);
     }
 
     private void setupImage(ImageView image, String imageUrl) {
-        image.setImageBitmap(null);
-        Picasso.with(image.getContext()).cancelRequest(image);
-        Picasso.with(image.getContext()).load(imageUrl).into(image);
+        requestManager.load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(image);
     }
 
     //重载这个方法并设置 RecyclerView#setHasStableIds能大幅度提高性能

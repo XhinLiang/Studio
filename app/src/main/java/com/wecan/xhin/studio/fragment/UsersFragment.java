@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.trello.rxlifecycle.components.support.RxFragment;
 import com.wecan.xhin.studio.activity.UserDetailsActivity;
 import com.wecan.xhin.studio.adapter.UsersAdapter;
@@ -28,7 +29,7 @@ public abstract class UsersFragment extends RxFragment implements UsersAdapter.L
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView recyclerView = new RecyclerView(getActivity());
         users = new ObservableArrayList<>();
-        recyclerView.setAdapter(new UsersAdapter(getActivity(), users, this));
+        recyclerView.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
         initData();
         return recyclerView;
     }

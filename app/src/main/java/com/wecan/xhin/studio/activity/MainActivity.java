@@ -1,5 +1,6 @@
 package com.wecan.xhin.studio.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -15,9 +16,8 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
-import com.wecan.xhin.studio.databinding.NavHeaderMainBinding;
+import com.wecan.xhin.studio.databinding.IncludeNavHeaderMainBinding;
 import com.wecan.xhin.studio.fragment.AllUserFragment;
-import com.wecan.xhin.studio.fragment.BooksFragment;
 import com.wecan.xhin.studio.fragment.SignedUserFragment;
 import com.wecan.xhin.studio.fragment.UsersFragment;
 
@@ -30,7 +30,7 @@ public class MainActivity extends RxAppCompatActivity {
 
     private ActivityMainBinding binding;
     private UsersFragment signedUserFragment, allFellowFragment;
-    private BooksFragment booksFragment;
+    private UsersFragment booksFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends RxAppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(binding.toolbar);
 
-        NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.getBinding(binding.navView);
+        IncludeNavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.getBinding(binding.navView);
         User user = getIntent().getParcelableExtra(KEY_USER);
         navHeaderMainBinding.setUser(user);
 
@@ -68,7 +68,7 @@ public class MainActivity extends RxAppCompatActivity {
     }
 
     private void initNavigationSelection() {
-        binding.navView.setCheckedItem(R.id.in_room);
+        binding.navView.setCheckedItem(R.id.signed_user);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         signedUserFragment = SignedUserFragment.newInstance();
         transaction.add(R.id.fl_content, signedUserFragment);
@@ -78,7 +78,7 @@ public class MainActivity extends RxAppCompatActivity {
     private void setTabSelection(int itemId) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (itemId) {
-            case R.id.in_room:
+            case R.id.signed_user:
                 hideFragments(transaction);
                 if (signedUserFragment == null) {
                     signedUserFragment = SignedUserFragment.newInstance();
@@ -90,13 +90,13 @@ public class MainActivity extends RxAppCompatActivity {
             case R.id.book:
                 hideFragments(transaction);
                 if (booksFragment == null) {
-                    booksFragment = new BooksFragment();
+                    booksFragment = SignedUserFragment.newInstance();
                     transaction.add(R.id.fl_content, booksFragment);
                     break;
                 }
                 transaction.show(booksFragment);
                 break;
-            case R.id.all_fellow:
+            case R.id.all_user:
                 hideFragments(transaction);
                 if (allFellowFragment == null) {
                     allFellowFragment = AllUserFragment.newInstance();
@@ -106,8 +106,10 @@ public class MainActivity extends RxAppCompatActivity {
                 transaction.show(allFellowFragment);
                 break;
             case R.id.about:
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.me:
+                startActivity(new Intent(this, UserDetailsActivity.class));
                 break;
         }
         transaction.commit();

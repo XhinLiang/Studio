@@ -46,17 +46,15 @@ public class App extends Application {
 
     private Retrofit retrofit;
 
-    private static final String BASE_URL = "http://rs.xidian.edu.cn/";
+    private static final String BASE_URL = "http://gank.avosapps.com/";
     public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     //返回当前单例的静态方法,判断是否是当前的App调用
     public static App from(Context context) {
         Context application = context.getApplicationContext();
-        if (application instanceof App) {
+        if (application instanceof App)
             return (App) application;
-        } else {
-            throw new IllegalArgumentException("Context must be from Studio");
-        }
+        throw new IllegalArgumentException("Context must be from Studio");
     }
 
 
@@ -65,7 +63,6 @@ public class App extends Application {
         super.onCreate();
 
         OkHttpClient okHttpClient = new OkHttpClient();
-
         //OKHttp的使用
         okHttpClient.networkInterceptors().add(new Interceptor() {
             @Override
@@ -101,9 +98,11 @@ public class App extends Application {
             T instance = retrofit.create(service);
             apis.put(service, instance);
         }
-
         //noinspection unchecked
         return (T) apis.get(service);
     }
 
+    public OkHttpClient getHttpClient() {
+        return retrofit.client();
+    }
 }

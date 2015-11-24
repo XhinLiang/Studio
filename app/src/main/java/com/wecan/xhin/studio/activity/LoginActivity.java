@@ -1,30 +1,35 @@
 package com.wecan.xhin.studio.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityLoginBinding;
+import com.wecan.xhin.studio.rx.RxNetworking;
 import com.wecan.xhin.studio.util.PreferenceHelper;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
 
-    private ProgressDialog pd;
+    private static final String TAG = "LoginActivity";
+
     private ActivityLoginBinding binding;
+    private Observable<User> observableConnect;
     private Api api;
 
     @Override
@@ -33,50 +38,47 @@ public class LoginActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         setSupportActionBar(binding.toolbar);
         api = App.from(this).createApi(Api.class);
-        pd = new ProgressDialog(this);
+        ProgressDialog pd = new ProgressDialog(this);
 
-        RxView.clickEvents(binding.btnLogin)
-                .compose(this.<ViewClickEvent>bindToLifecycle())
-                .filter(new InputFilter(binding.etName, R.string.name_no_input))
-                .filter(new InputFilter(binding.etPhone, R.string.phone_no_input))
-                .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms
-                .doOnNext(new Action1<ViewClickEvent>() {
+        Observable.Transformer<User, User> networkingIndicator = RxNetworking.bindConnecting(pd);
+
+        observableConnect = Observable
+                //defer操作符是直到有订阅者订阅时，才通过Observable的工厂方法创建Observable并执行
+                //defer操作符能够保证Observable的状态是最新的
+                .defer(new Func0<Observable<User>>() {
                     @Override
-                    public void call(ViewClickEvent viewClickEvent) {
-                        pd.show();
-                    }
-                })
-                .compose(new Observable.Transformer<ViewClickEvent, User>() {
-                    @Override
-                    public Observable<User> call(Observable<ViewClickEvent> viewClickEventObservable) {
+                    public Observable<User> call() {
                         Map<String, String> map = new HashMap<>();
                         map.put(binding.etName.getText().toString(), binding.etPhone.getText().toString());
                         return api.login(map);
                     }
                 })
-                .doOnNext(new Action1<User>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(networkingIndicator);
+
+        setRxClick(binding.btnLogin)
+                .filter(new InputFilter(binding.etName, R.string.name_no_input))
+                .filter(new InputFilter(binding.etPhone, R.string.phone_no_input))
+                .flatMap(new Func1<ViewClickEvent, Observable<User>>() {
                     @Override
-                    public void call(User loginData) {
-                        pd.hide();
-                        PreferenceHelper.getInstance(LoginActivity.this)
-                                .saveParam(App.KEY_PREFERENCE_USER, binding.etName.getText().toString());
-                        PreferenceHelper.getInstance(LoginActivity.this)
-                                .saveParam(App.KEY_PREFERENCE_USER, binding.etPhone.getText().toString());
-                    }
-                })
-                .doOnError(new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        pd.hide();
-                        showSimpleDialog(throwable.getMessage());
+                    public Observable<User> call(ViewClickEvent viewClickEvent) {
+                        return observableConnect;
                     }
                 })
                 .subscribe(new Action1<User>() {
                     @Override
-                    public void call(User user) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class)
-                                .putExtra(MainActivity.KEY_USER, user));
-                        finish();
+                    public void call(User meizhiData) {
+                        PreferenceHelper.getInstance(LoginActivity.this)
+                                .saveParam(App.KEY_PREFERENCE_USER, binding.etName.getText().toString());
+                        PreferenceHelper.getInstance(LoginActivity.this)
+                                .saveParam(App.KEY_PREFERENCE_PHONE, binding.etPhone.getText().toString());
+                        Log.d(TAG, meizhiData.toString());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Log.d(TAG, throwable.getMessage());
                     }
                 });
     }

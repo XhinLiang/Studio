@@ -16,22 +16,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login">
+
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"></activity>
-        <activity
-            android:name=".activity.UserDetailsActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".activity.RegisterActivity" />
+
+        <activity android:name=".activity.MainActivity" />
+
+        <activity android:name=".activity.AboutActivity" />
+
+        <activity android:name=".activity.UserDetailsActivity" />
+
+        <activity android:name=".activity.Test" />
     </application>
 
 </manifest>

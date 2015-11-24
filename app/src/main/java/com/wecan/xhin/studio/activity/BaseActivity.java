@@ -2,10 +2,14 @@ package com.wecan.xhin.studio.activity;
 
 import android.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
+import android.view.View;
 import android.widget.EditText;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
+import java.util.concurrent.TimeUnit;
 
 import rx.functions.Func1;
 
@@ -15,14 +19,21 @@ import rx.functions.Func1;
  */
 public class BaseActivity extends RxAppCompatActivity {
 
-    protected void showSimpleDialog(CharSequence content){
+    public rx.Observable<ViewClickEvent> setRxClick(View view) {
+        return RxView.clickEvents(view)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .throttleFirst(500, TimeUnit.MILLISECONDS);
+    }
+
+
+    protected void showSimpleDialog(CharSequence content) {
         new AlertDialog.Builder(this)
                 .setMessage(content)
                 .create()
                 .show();
     }
 
-    protected void showSimpleDialog(int contentRes){
+    protected void showSimpleDialog(int contentRes) {
         new AlertDialog.Builder(this)
                 .setMessage(contentRes)
                 .create()
@@ -48,7 +59,7 @@ public class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-    public class InputFilter implements Func1<ViewClickEvent, Boolean>{
+    public class InputFilter implements Func1<ViewClickEvent, Boolean> {
         EditText editText;
         int messageRes;
 
@@ -59,7 +70,7 @@ public class BaseActivity extends RxAppCompatActivity {
 
         @Override
         public Boolean call(ViewClickEvent viewClickEvent) {
-            if (!editText.getText().toString().isEmpty()) {
+            if (editText.getText().toString().isEmpty()) {
                 showSimpleDialog(messageRes);
                 return false;
             }
