@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 import com.jakewharton.rxbinding.support.design.widget.RxNavigationView;
 import com.jakewharton.rxbinding.support.v4.widget.RxDrawerLayout;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;
@@ -24,7 +23,7 @@ import com.wecan.xhin.studio.fragment.UsersFragment;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-public class MainActivity extends RxAppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     public static final String KEY_USER = "user";
 

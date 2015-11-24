@@ -19,13 +19,12 @@
 package com.wecan.xhin.studio.api;
 
 
-import com.wecan.xhin.studio.bean.MeizhiData;
-import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.bean.up.SignBody;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit.http.Body;
@@ -33,16 +32,12 @@ import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
-import retrofit.http.Path;
 import retrofit.http.QueryMap;
 import rx.Observable;
 
 public interface Api {
 
-    String BASE_URL = "";
-
-    @GET("api/data/福利/" + 10 + "/{page}")
-    Observable<MeizhiData> getMeizhiData(@Path("page") int page);
+    String BASE_URL = "http://192.168.1.180";
 
     @GET("api/users")
     Observable<User> login(@QueryMap Map<String,String> user);
@@ -60,10 +55,10 @@ public interface Api {
     Observable<BaseData> unsign(@Body SignBody user);
 
     @GET("/api/message_all")
-    Observable<UsersData> getAllUser();
+    Observable<List<User>> getAllUser();
 
     @GET("/api/message")
-    Observable<UsersData> getSignedUser();
+    Observable<List<User>> getSignedUser();
 
 
 }

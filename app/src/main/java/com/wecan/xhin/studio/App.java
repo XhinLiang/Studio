@@ -27,6 +27,7 @@ import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
+import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.net.LoggingInterceptor;
 
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class App extends Application {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(BASE_URL)
+                .baseUrl(Api.BASE_URL)
                 .build();
     }
 

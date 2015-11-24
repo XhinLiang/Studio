@@ -83,6 +83,14 @@ public class LoginActivity extends BaseActivity {
                         Log.d(TAG, throwable.getMessage());
                     }
                 });
+
+        setRxClick(binding.btnRegister)
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                    }
+                });
     }
 }
 

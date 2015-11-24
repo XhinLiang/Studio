@@ -50,7 +50,7 @@ public class LibrariesAdapter extends RecyclerView.Adapter<BindingRecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 || position == 2 ? 0 : 1;
+        return libraries.get(position).author == null ? 0 : 1;
     }
 
     @Override

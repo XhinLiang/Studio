@@ -1,5 +1,6 @@
 package com.wecan.xhin.studio.bean.common;
 
+import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,37 +8,40 @@ import android.os.Parcelable;
  * Created by xhinliang on 15-11-18.
  * xhinliang@gmail.com
  */
-public class User implements Parcelable {
-    public int position;	/*3*/
-    public int group_name;	/*2*/
-    public int id;	/*10*/
-    public int sex;	/*1*/
+public class User extends BaseObservable implements Parcelable {
+    public int position;
+    public int group_name;
+    public int id;
+    public int sex;
+    public int status;
 
-    public String phone;	/*121*/
-    public String sign_date;	/*2015-11-20 15:52:31*/
-    public String status;	/*0*/
-    public String name;	/*wer123*/
-    public String imgurl;	/*www.123456.com*/
+    public String phone;
+    public String sign_date;
+
+
+    public String name;
+    public String imgurl;
     public String description;
+
+
+    public static final int VALUE_STATUS_SIGN = 1;
+    public static final int VALUE_STATUS_UNSIGN = 0;
 
     public String getName() {
         return name;
     }
 
-    public static String getGroupName(int group){
+    public static String getGroupName(int group) {
         return "SS";
     }
 
-    public static String getPositionName(int position){
+    public static String getPositionName(int position) {
         return "SS";
     }
 
-    public static String getSexName(int sex){
+    public static String getSexName(int sex) {
         return "SS";
     }
-
-
-
 
     @Override
     public int describeContents() {
@@ -50,9 +54,9 @@ public class User implements Parcelable {
         dest.writeInt(this.group_name);
         dest.writeInt(this.id);
         dest.writeInt(this.sex);
+        dest.writeInt(this.status);
         dest.writeString(this.phone);
         dest.writeString(this.sign_date);
-        dest.writeString(this.status);
         dest.writeString(this.name);
         dest.writeString(this.imgurl);
         dest.writeString(this.description);
@@ -66,15 +70,15 @@ public class User implements Parcelable {
         this.group_name = in.readInt();
         this.id = in.readInt();
         this.sex = in.readInt();
+        this.status = in.readInt();
         this.phone = in.readString();
         this.sign_date = in.readString();
-        this.status = in.readString();
         this.name = in.readString();
         this.imgurl = in.readString();
         this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         public User createFromParcel(Parcel source) {
             return new User(source);
         }

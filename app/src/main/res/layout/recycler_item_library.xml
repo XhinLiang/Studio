@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,35 +10,39 @@
 
     </data>
 
-    <FrameLayout
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/mrl_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
-        android:foreground="?selectableItemBackground">
+        app:mrl_rippleColor="?attr/colorPrimary"
+        app:mrl_rippleOverlay="true">
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="bottom"
-            android:background="@color/light_grey" />
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:elevation="1dp"
+            android:foreground="?selectableItemBackground"
+            tools:ignore="UnusedAttribute">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="@{name}"
-            android:typeface="monospace"
-            tools:text="XhinLiang / Studio" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@{name}"
+                android:typeface="monospace"
+                tools:text="oxoooo / mr-mantou-android" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="bottom"
-            android:background="@color/light_grey" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="#20000000" />
 
-    </FrameLayout>
+        </FrameLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </layout>

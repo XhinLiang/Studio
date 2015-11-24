@@ -93,6 +93,10 @@ public class UserDetailsActivity extends BaseActivity {
         requestManager = Glide.with(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
         setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
 
         setRxClick(binding.fab)
                 .subscribe(new Action1<ViewClickEvent>() {

@@ -1,6 +1,7 @@
 package com.wecan.xhin.studio.activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.wecan.xhin.studio.R;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +31,12 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void showSimpleDialog(CharSequence content) {
         new AlertDialog.Builder(this)
                 .setMessage(content)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
                 .create()
                 .show();
     }
@@ -36,6 +44,12 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void showSimpleDialog(int contentRes) {
         new AlertDialog.Builder(this)
                 .setMessage(contentRes)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
                 .create()
                 .show();
     }

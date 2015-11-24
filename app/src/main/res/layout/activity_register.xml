@@ -24,10 +24,6 @@
 
             </android.support.v7.widget.Toolbar>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:background="@drawable/toolbar_shadow" />
         </LinearLayout>
 
         <LinearLayout
@@ -138,7 +134,7 @@
                 android:id="@+id/btn_register"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/register"
                 android:textStyle="bold" />

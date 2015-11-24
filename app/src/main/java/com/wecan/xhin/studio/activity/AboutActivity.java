@@ -30,11 +30,11 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
-
-        libraries.add(new GitRepository("XhinLiang", "Visit GitHub of This App", "https://github.com/XhinLiang/Studio"));
+        libraries.add(new GitRepository(null, "Visit Our Website", null));
+        libraries.add(new GitRepository("Xidian", "Wecan Studio", "http://www.wecanstudio.me"));
+        libraries.add(new GitRepository(null, "Visit GitHub of This App", null));
         libraries.add(new GitRepository("XhinLiang", "Studio", "https://github.com/XhinLiang/Studio"));
-        libraries.add(new GitRepository("XhinLiang", "Thanks to", "https://github.com/XhinLiang/Studio"));
-
+        libraries.add(new GitRepository(null, "Thanks to", null));
         libraries.add(new GitRepository("Square", "Okhttp", "https://square.github.io/okhttp"));
         libraries.add(new GitRepository("Square", "Retrofit", "https://square.github.io/retrofit"));
         libraries.add(new GitRepository("Google", "Gson", "https://github.com/google/gson"));

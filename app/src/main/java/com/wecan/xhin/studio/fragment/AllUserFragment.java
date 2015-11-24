@@ -1,12 +1,11 @@
 package com.wecan.xhin.studio.fragment;
 
-import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.bean.down.UsersData;
+import com.wecan.xhin.studio.bean.common.User;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by xhinliang on 15-11-20.
@@ -19,17 +18,7 @@ public class AllUserFragment extends UsersFragment {
     }
 
     @Override
-    protected void initData() {
-        Api api = App.from(getActivity()).createApi(Api.class);
-        api.getAllUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<UsersData>bindToLifecycle())
-                .subscribe(new Action1<UsersData>() {
-                    @Override
-                    public void call(UsersData usersData) {
-                        users.addAll(usersData.data);
-                    }
-                });
+    protected Observable<List<User>> getUserApi(Api api) {
+        return api.getAllUser();
     }
 }

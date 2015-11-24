@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.LoginActivity">
 
-    <data/>
+    <data />
 
 
     <FrameLayout
@@ -21,14 +21,10 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             </android.support.v7.widget.Toolbar>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:background="@drawable/toolbar_shadow" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,9 +61,9 @@
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
                     android:hint="@string/prompt_phone"
                     android:imeOptions="actionUnspecified"
+                    android:inputType="phone"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -76,9 +72,18 @@
                 android:id="@+id/btn_login"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_login"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_register"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_register"
                 android:textStyle="bold" />
 
 

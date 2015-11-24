@@ -5,5 +5,9 @@ package com.wecan.xhin.studio.bean.up;
  * xhinliang@gmail.com
  */
 public class SignBody {
-    String name;
+    public String name;
+
+    public SignBody(String name) {
+        this.name = name;
+    }
 }
