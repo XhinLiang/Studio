@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.RecyclerItemUserBinding;
 import com.wecan.xhin.studio.rx.BindingRecyclerView;
@@ -36,7 +37,6 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
     public void onBindViewHolder(ViewHolder holder, int position) {
         User item = data.get(position);
         holder.binding.setUser(item);
-
         // execute the binding immediately to ensure
         // the original size of RatioImageView is set before layout
         holder.binding.executePendingBindings();
@@ -46,10 +46,13 @@ public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAda
     }
 
     private void setupImage(ImageView image, String imageUrl) {
-        if (imageUrl == null || imageUrl.length() == 0)
+        if (imageUrl == null || imageUrl.length() == 0) {
+            image.setImageResource(R.drawable.header);
             return;
+        }
         requestManager.load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.defimgs)
                 .into(image);
     }
 

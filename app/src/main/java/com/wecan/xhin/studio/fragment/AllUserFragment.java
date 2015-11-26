@@ -1,9 +1,7 @@
 package com.wecan.xhin.studio.fragment;
 
 import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.bean.common.User;
-
-import java.util.List;
+import com.wecan.xhin.studio.bean.down.UsersData;
 
 import rx.Observable;
 
@@ -18,7 +16,7 @@ public class AllUserFragment extends UsersFragment {
     }
 
     @Override
-    protected Observable<List<User>> getUserApi(Api api) {
+    protected Observable<UsersData> getUserApi(Api api) {
         return api.getAllUser();
     }
 }

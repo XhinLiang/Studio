@@ -21,6 +21,7 @@ package com.wecan.xhin.studio;
 import android.app.Application;
 import android.content.Context;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,6 +62,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AVOSCloud.initialize(this, "AkVsXJ4RoWq1juPauOHe1OW5", "gFICBkjJSxlI5fHnvNyB7Lfj");
 
         OkHttpClient okHttpClient = new OkHttpClient();
         //OKHttp的使用

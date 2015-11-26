@@ -23,7 +23,17 @@ public class User extends BaseObservable implements Parcelable {
     public String imgurl;
     public String description;
 
+    public static final String[] groups = {
+            "组别", "前端", "后台", "移动", "产品", "设计", "YOU KNOW NOTHING"
+    };
 
+    public static final String[] positions = {
+            "职位", "组员", "组长", "室长", "John Snow"
+    };
+
+    public static final String[] sexs = {
+            "性别", "男", "女"
+    };
     public static final int VALUE_STATUS_SIGN = 1;
     public static final int VALUE_STATUS_UNSIGN = 0;
 
@@ -32,15 +42,15 @@ public class User extends BaseObservable implements Parcelable {
     }
 
     public static String getGroupName(int group) {
-        return "SS";
+        return groups[group];
     }
 
     public static String getPositionName(int position) {
-        return "SS";
+        return positions[position];
     }
 
     public static String getSexName(int sex) {
-        return "SS";
+        return sexs[sex];
     }
 
     @Override

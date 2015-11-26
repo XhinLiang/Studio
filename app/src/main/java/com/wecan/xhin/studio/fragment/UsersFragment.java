@@ -2,28 +2,26 @@ package com.wecan.xhin.studio.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.activity.UserDetailsActivity;
 import com.wecan.xhin.studio.adapter.UsersAdapter;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
-import com.wecan.xhin.studio.databinding.FragmentUsersBinding;
-import com.wecan.xhin.studio.rx.RxEndlessRecyclerView;
+import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.rx.RxNetworking;
-
-import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,9 +37,8 @@ import rx.schedulers.Schedulers;
 public abstract class UsersFragment extends BaseFragment implements UsersAdapter.Listener {
 
     protected ObservableArrayList<User> users;
-    protected FragmentUsersBinding binding;
     protected Action1<Throwable> errorAction;
-    protected Observable<List<User>> observableConnect;
+    protected Observable<UsersData> observableConnect;
     protected Api api;
 
     @Override
@@ -53,10 +50,20 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users, container, true);
+        return inflater.inflate(R.layout.fragment_users, container, false);
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         users = new ObservableArrayList<>();
-        binding.rvUsers.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
-        
+        RecyclerView rvUsers = (RecyclerView) view.findViewById(R.id.rv_users);
+        final SwipeRefreshLayout srlRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_refresh);
+        rvUsers.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
+
+        Observable.Transformer<UsersData, UsersData> networkingIndicator =
+                RxNetworking.bindRefreshing((SwipeRefreshLayout) view.findViewById(R.id.srl_refresh));
+
         errorAction = new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {
@@ -64,15 +71,10 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
             }
         };
 
-        setFabVisibility(binding.fabSign);
-
-        Observable.Transformer<List<User>, List<User>> networkingIndicator =
-                RxNetworking.bindRefreshing(binding.srlRefresh);
-
         observableConnect = Observable
-                .defer(new Func0<Observable<List<User>>>() {
+                .defer(new Func0<Observable<UsersData>>() {
                     @Override
-                    public Observable<List<User>> call() {
+                    public Observable<UsersData> call() {
                         return getUserApi(api);
                     }
                 })
@@ -80,31 +82,33 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);
 
-
-        RxEndlessRecyclerView.reachesEnd(binding.rvUsers)
-                .compose(this.<Integer>bindToLifecycle())
-                .flatMap(new Func1<Integer, Observable<List<User>>>() {
+        RxSwipeRefreshLayout.refreshes(srlRefresh)
+                .flatMap(new Func1<Void, Observable<UsersData>>() {
                     @Override
-                    public Observable<List<User>> call(Integer integer) {
+                    public Observable<UsersData> call(Void aVoid) {
                         return observableConnect;
                     }
                 })
-                .subscribe(new Action1<List<User>>() {
+                .compose(this.<UsersData>bindToLifecycle())
+                .subscribe(new Action1<UsersData>() {
                     @Override
-                    public void call(List<User> newUsers) {
-                        users.addAll(newUsers);
+                    public void call(UsersData usersData) {
+                        users.clear();
+                        users.addAll(usersData.data);
                     }
-                }, errorAction);
+                });
 
+        observableConnect.subscribe(new Action1<UsersData>() {
+            @Override
+            public void call(UsersData usersData) {
+                users.clear();
+                users.addAll(usersData.data);
+            }
+        });
 
-        return binding.getRoot();
     }
 
-    protected void setFabVisibility(FloatingActionButton fab) {
-        fab.setVisibility(View.GONE);
-    }
-
-    protected abstract Observable<List<User>> getUserApi(Api api);
+    protected abstract Observable<UsersData> getUserApi(Api api);
 
     @Override
     public void onUserItemClick(UsersAdapter.ViewHolder holder) {

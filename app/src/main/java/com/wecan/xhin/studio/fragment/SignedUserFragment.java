@@ -1,5 +1,6 @@
 package com.wecan.xhin.studio.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -9,10 +10,9 @@ import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.BaseData;
+import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.bean.up.SignBody;
 import com.wecan.xhin.studio.rx.RxNetworking;
-
-import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -31,6 +31,7 @@ public class SignedUserFragment extends UsersFragment {
 
     private User user;
     private Observable<BaseData> observableSign;
+    private Observable.Transformer<BaseData, BaseData> networkingIndicator;
 
     public static SignedUserFragment newInstance(User user) {
         SignedUserFragment fragment = new SignedUserFragment();
@@ -41,21 +42,26 @@ public class SignedUserFragment extends UsersFragment {
     }
 
     @Override
-    protected void setFabVisibility(final FloatingActionButton fab) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ProgressDialog pd = new ProgressDialog(getActivity());
+        networkingIndicator = RxNetworking.bindConnecting(pd);
+        setEvent((FloatingActionButton) view.findViewById(R.id.fab_sign));
+    }
+
+
+    protected void setEvent(final FloatingActionButton fab) {
         fab.setVisibility(View.VISIBLE);
         user = getArguments().getParcelable(KEY_USER);
-
-        Observable.Transformer<BaseData, BaseData> networkingIndicator =
-                RxNetworking.bindRefreshing(binding.srlRefresh);
-
+        if (user == null)
+            return;
+        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN ? R.drawable.ic_logout : R.drawable.ic_login);
         observableSign = Observable
-                //defer操作符是直到有订阅者订阅时，才通过Observable的工厂方法创建Observable并执行
-                //defer操作符能够保证Observable的状态是最新的
                 .defer(new Func0<Observable<BaseData>>() {
                     @Override
                     public Observable<BaseData> call() {
                         if (user.status == User.VALUE_STATUS_SIGN)
-                            return api.unsign(new SignBody(user.name));
+                            return api.unSign(user.name);
                         return api.sign(new SignBody(user.name));
                     }
                 })
@@ -70,17 +76,28 @@ public class SignedUserFragment extends UsersFragment {
                         return observableSign;
                     }
                 })
-                .subscribe(new Action1<BaseData>() {
+                .retry()
+                .flatMap(new Func1<BaseData, Observable<UsersData>>() {
                     @Override
-                    public void call(BaseData baseData) {
-                        user.status = user.status == 0 ? 1 : 0;
-                        fab.setImageResource(user.status == 1 ? R.drawable.defimgs : R.drawable.header);
+                    public Observable<UsersData> call(BaseData baseData) {
+                        user.status = user.status == User.VALUE_STATUS_UNSIGN ?
+                                User.VALUE_STATUS_SIGN : User.VALUE_STATUS_UNSIGN;
+                        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN
+                                ? R.drawable.ic_logout : R.drawable.ic_login);
+                        return observableConnect;
+                    }
+                })
+                .subscribe(new Action1<UsersData>() {
+                    @Override
+                    public void call(UsersData baseData) {
+                        users.clear();
+                        users.addAll(baseData.data);
                     }
                 }, errorAction);
     }
 
     @Override
-    protected Observable<List<User>> getUserApi(Api api) {
+    protected Observable<UsersData> getUserApi(Api api) {
         return api.getSignedUser();
     }
 }

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.studio.App;
@@ -40,6 +39,9 @@ public class LoginActivity extends BaseActivity {
 
         Observable.Transformer<User, User> networkingIndicator = RxNetworking.bindConnecting(pd);
 
+        binding.etName.setText("John");
+        binding.etPhone.setText("13434343434");
+
         observableConnect = Observable
                 //defer操作符是直到有订阅者订阅时，才通过Observable的工厂方法创建Observable并执行
                 //defer操作符能够保证Observable的状态是最新的
@@ -49,6 +51,7 @@ public class LoginActivity extends BaseActivity {
                         return api.login(binding.etName.getText().toString(), binding.etPhone.getText().toString());
                     }
                 })
+
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);
@@ -62,6 +65,7 @@ public class LoginActivity extends BaseActivity {
                         return observableConnect;
                     }
                 })
+                .retry()
                 .subscribe(new Action1<User>() {
                     @Override
                     public void call(User user) {
@@ -71,11 +75,12 @@ public class LoginActivity extends BaseActivity {
                                 .saveParam(App.KEY_PREFERENCE_PHONE, binding.etPhone.getText().toString());
                         startActivity(new Intent(LoginActivity.this, MainActivity.class)
                                 .putExtra(MainActivity.KEY_USER, user));
+                        finish();
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.d(TAG, throwable.getMessage());
+                        showSimpleDialog(throwable.getMessage());
                     }
                 });
 

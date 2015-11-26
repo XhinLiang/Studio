@@ -32,7 +32,16 @@
 
         <activity android:name=".activity.UserDetailsActivity" />
 
-        <activity android:name=".activity.Test" />
+        <activity android:name=".activity.MyDetailsActivity" />
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
     </application>
 
 </manifest>

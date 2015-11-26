@@ -21,10 +21,9 @@ package com.wecan.xhin.studio.api;
 
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.BaseData;
+import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.bean.up.SignBody;
-
-import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -36,7 +35,7 @@ import rx.Observable;
 
 public interface Api {
 
-    String BASE_URL = "http://192.168.1.180/RestFulApi/index.php/";
+    String BASE_URL = "http://121.42.209.19/RestfulApi/index.php/";
 
     @GET("api/users")
     Observable<User> login(@Query("name") String name, @Query("phone") String phone);
@@ -51,13 +50,13 @@ public interface Api {
     Observable<BaseData> sign(@Body SignBody user);
 
     @DELETE("api/sign")
-    Observable<BaseData> unsign(@Body SignBody user);
+    Observable<BaseData> unSign(@Query("name") String name);
 
-    @GET("/api/message_all")
-    Observable<List<User>> getAllUser();
+    @GET("api/message_all")
+    Observable<UsersData> getAllUser();
 
-    @GET("/api/message")
-    Observable<List<User>> getSignedUser();
+    @GET("api/message")
+    Observable<UsersData> getSignedUser();
 
 
 }
