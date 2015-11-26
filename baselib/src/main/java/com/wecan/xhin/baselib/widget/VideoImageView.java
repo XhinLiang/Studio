@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wecan.xhin.studio;
+package com.wecan.xhin.baselib.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

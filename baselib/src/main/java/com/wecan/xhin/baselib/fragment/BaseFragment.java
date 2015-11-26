@@ -1,4 +1,4 @@
-package com.wecan.xhin.studio.fragment;
+package com.wecan.xhin.baselib.fragment;
 
 import android.view.View;
 

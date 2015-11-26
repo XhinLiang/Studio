@@ -7,13 +7,14 @@ import android.util.Log;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
+import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.databinding.ActivityRegisterBinding;
-import com.wecan.xhin.studio.rx.RxNetworking;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import java.util.concurrent.TimeUnit;
 

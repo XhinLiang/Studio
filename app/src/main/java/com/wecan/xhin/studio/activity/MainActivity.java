@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.jakewharton.rxbinding.support.design.widget.RxNavigationView;
 import com.jakewharton.rxbinding.support.v4.widget.RxDrawerLayout;
+import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityMainBinding;

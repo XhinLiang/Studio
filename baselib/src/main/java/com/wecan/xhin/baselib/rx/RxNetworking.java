@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wecan.xhin.studio.rx;
+package com.wecan.xhin.baselib.rx;
 
 import android.app.ProgressDialog;
 import android.support.v4.widget.SwipeRefreshLayout;

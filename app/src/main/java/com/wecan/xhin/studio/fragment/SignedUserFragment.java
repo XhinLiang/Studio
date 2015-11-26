@@ -12,7 +12,7 @@ import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.bean.up.SignBody;
-import com.wecan.xhin.studio.rx.RxNetworking;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

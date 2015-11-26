@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
+import com.wecan.xhin.baselib.fragment.BaseFragment;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.activity.UserDetailsActivity;
@@ -21,7 +22,7 @@ import com.wecan.xhin.studio.adapter.UsersAdapter;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.UsersData;
-import com.wecan.xhin.studio.rx.RxNetworking;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

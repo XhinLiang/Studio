@@ -6,13 +6,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.jakewharton.rxbinding.view.ViewClickEvent;
+import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityLoginBinding;
-import com.wecan.xhin.studio.rx.RxNetworking;
-import com.wecan.xhin.studio.util.PreferenceHelper;
+import com.wecan.xhin.baselib.rx.RxNetworking;
+import com.wecan.xhin.baselib.util.PreferenceHelper;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

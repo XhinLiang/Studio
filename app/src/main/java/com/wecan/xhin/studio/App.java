@@ -29,7 +29,7 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
 import com.wecan.xhin.studio.api.Api;
-import com.wecan.xhin.studio.net.LoggingInterceptor;
+import com.wecan.xhin.baselib.net.LoggingInterceptor;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,10 +1,10 @@
-package com.wecan.xhin.studio.util;
+package com.wecan.xhin.baselib.util;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.wecan.xhin.studio.R;
+import com.wecan.xhin.baselib.R;
 
 
 /**

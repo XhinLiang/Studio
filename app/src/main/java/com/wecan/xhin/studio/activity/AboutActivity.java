@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.adapter.LibrariesAdapter;
 import com.wecan.xhin.studio.bean.GitRepository;

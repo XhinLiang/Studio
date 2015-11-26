@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wecan.xhin.studio.net;
+package com.wecan.xhin.baselib.net;
 
 import android.util.Log;
 

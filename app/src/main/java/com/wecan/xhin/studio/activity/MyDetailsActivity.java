@@ -19,12 +19,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
+import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityUserDetailsBinding;
-import com.wecan.xhin.studio.rx.RxNetworking;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import java.io.IOException;
 

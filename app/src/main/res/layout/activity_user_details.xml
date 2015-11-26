@@ -42,7 +42,7 @@
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax">
 
-                    <com.wecan.xhin.studio.VideoImageView
+                    <com.wecan.xhin.baselib.widget.VideoImageView
                         android:id="@+id/ivPicture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
