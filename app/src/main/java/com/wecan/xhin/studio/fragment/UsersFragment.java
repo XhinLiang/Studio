@@ -2,11 +2,10 @@ package com.wecan.xhin.studio.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
-import com.wecan.xhin.baselib.fragment.BaseFragment;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.activity.UserDetailsActivity;
@@ -22,7 +21,7 @@ import com.wecan.xhin.studio.adapter.UsersAdapter;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.UsersData;
-import com.wecan.xhin.baselib.rx.RxNetworking;
+import com.wecan.xhin.studio.databinding.FragmentUsersBinding;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -35,7 +34,8 @@ import rx.schedulers.Schedulers;
  * Created by xhinliang on 15-11-18.
  * xhinliang@gmail.com
  */
-public abstract class UsersFragment extends BaseFragment implements UsersAdapter.Listener {
+public abstract class UsersFragment extends RxBindingFragment<FragmentUsersBinding>
+        implements UsersAdapter.Listener {
 
     protected ObservableArrayList<User> users;
     protected Action1<Throwable> errorAction;
@@ -50,20 +50,19 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_users, container, false);
+    public FragmentUsersBinding onCreateBinding(LayoutInflater inflater,
+                                                @Nullable ViewGroup container,
+                                                @Nullable Bundle savedInstanceState) {
+        return DataBindingUtil.inflate(inflater, R.layout.fragment_users, container, false);
     }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(final View v, Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
         users = new ObservableArrayList<>();
-        RecyclerView rvUsers = (RecyclerView) view.findViewById(R.id.rv_users);
-        final SwipeRefreshLayout srlRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_refresh);
-        rvUsers.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
-
+        binding.rvUsers.setAdapter(new UsersAdapter(getActivity(), users, this, Glide.with(getActivity())));
         Observable.Transformer<UsersData, UsersData> networkingIndicator =
-                RxNetworking.bindRefreshing((SwipeRefreshLayout) view.findViewById(R.id.srl_refresh));
+                RxNetworking.bindRefreshing(binding.srlRefresh);
 
         errorAction = new Action1<Throwable>() {
             @Override
@@ -83,7 +82,7 @@ public abstract class UsersFragment extends BaseFragment implements UsersAdapter
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);
 
-        RxSwipeRefreshLayout.refreshes(srlRefresh)
+        RxSwipeRefreshLayout.refreshes(binding.srlRefresh)
                 .flatMap(new Func1<Void, Observable<UsersData>>() {
                     @Override
                     public Observable<UsersData> call(Void aVoid) {

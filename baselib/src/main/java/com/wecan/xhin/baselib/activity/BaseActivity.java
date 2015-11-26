@@ -22,6 +22,9 @@ import rx.functions.Func1;
  */
 public class BaseActivity extends RxAppCompatActivity {
 
+
+
+
     public rx.Observable<ViewClickEvent> setRxClick(View view) {
         return RxView.clickEvents(view)
                 .compose(this.<ViewClickEvent>bindToLifecycle())

@@ -24,12 +24,13 @@
                 android:id="@+id/ivAvatar"
                 android:layout_width="70dp"
                 android:layout_height="fill_parent"
+                android:scaleType="fitXY"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="6dip"
                 android:layout_marginRight="6dip"
                 android:contentDescription="@string/nothing"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/header" />
 
             <TextView
                 android:id="@+id/subtitle"

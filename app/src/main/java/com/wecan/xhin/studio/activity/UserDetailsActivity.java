@@ -1,7 +1,12 @@
 package com.wecan.xhin.studio.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -32,7 +37,7 @@ public class UserDetailsActivity extends BaseActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
         }
 
-        User user = getIntent().getParcelableExtra(KEY_USER);
+        final User user = getIntent().getParcelableExtra(KEY_USER);
         binding.setUser(user);
         setupImage(binding.ivPicture, binding.getUser().imgurl);
 
@@ -40,7 +45,21 @@ public class UserDetailsActivity extends BaseActivity {
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + user.phone));
+                        //打电话有可能被拒绝
+                        if (ActivityCompat.checkSelfPermission(UserDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        startActivity(intent);
+                    }
+                });
 
+        setRxClick(binding.ivPicture)
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        startActivity(new Intent(UserDetailsActivity.this, PictureActivity.class)
+                                .putExtra(PictureActivity.KEY_IMAGE_URL, user.imgurl));
                     }
                 });
     }

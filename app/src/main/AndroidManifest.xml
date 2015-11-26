@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wecan.xhin.studio">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,14 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar.other">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar.other"/>
 
         <activity android:name=".activity.MainActivity" />
 
@@ -33,6 +36,9 @@
         <activity android:name=".activity.UserDetailsActivity" />
 
         <activity android:name=".activity.MyDetailsActivity" />
+
+        <activity android:name=".activity.PictureActivity"
+            android:theme="@style/AppTheme.NoActionBar.other"/>
 
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"

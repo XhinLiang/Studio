@@ -84,7 +84,7 @@ public class MyDetailsActivity extends BaseActivity {
             }
         };
 
-        binding.fab.setImageResource(android.R.drawable.ic_input_get);
+        binding.fab.setImageResource(android.R.drawable.ic_menu_camera);
 
         setRxClick(binding.fab)
                 .subscribe(new Action1<ViewClickEvent>() {
@@ -177,6 +177,16 @@ public class MyDetailsActivity extends BaseActivity {
         binding.setUser(user);
         setupImage(binding.ivPicture, binding.getUser().imgurl);
         setAsCurrentUser();
+
+        setRxClick(binding.ivPicture)
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        startActivity(new Intent(MyDetailsActivity.this, PictureActivity.class)
+                                .putExtra(PictureActivity.KEY_IMAGE_URL, user.imgurl));
+                    }
+                });
+
     }
 
     private void setupImage(ImageView image, String imageUrl) {
