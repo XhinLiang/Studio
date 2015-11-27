@@ -20,12 +20,12 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityUserDetailsBinding;
-import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import java.io.IOException;
 
@@ -36,6 +36,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class MyDetailsActivity extends BaseActivity {
@@ -170,12 +171,10 @@ public class MyDetailsActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
         setSupportActionBar(binding.toolbar);
         setHasHomeButton();
-
         user = getIntent().getParcelableExtra(KEY_USER);
         binding.setUser(user);
         setupImage(binding.ivPicture, binding.getUser().imgurl);
         setAsCurrentUser();
-
         setRxClick(binding.ivPicture)
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
@@ -238,39 +237,58 @@ public class MyDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
-            return;
-        if (requestCode != 1 || data == null)
+        if (resultCode != RESULT_OK || requestCode != 1 || data == null)
             return;
         String photo = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS).get(0);
-        AVFile file = null;
-        try {
-            file = AVFile.withAbsoluteLocalPath(String.format("avatar_%s.jpg", user.name), photo);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (file == null)
-            return;
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMax(100);
-        pd.show();
-        final AVFile finalFile = file;
-        file.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                pd.hide();
-                if (e != null) {
-                    showSimpleDialog(R.string.error);
-                    return;
-                }
-                user.imgurl = finalFile.getUrl();
-                observableUpdate.subscribe(observerUser);
-            }
-        }, new ProgressCallback() {
-            @Override
-            public void done(Integer integer) {
-                pd.setProgress(integer);
-            }
-        });
+        Observable.just(photo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(new Func1<String, AVFile>() {
+                    @Override
+                    public AVFile call(String s) {
+                        try {
+                            return AVFile.withAbsoluteLocalPath(String.format("avatar_%s_%d.jpg", user.name, System.currentTimeMillis()), s);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                })
+                .filter(new Func1<AVFile, Boolean>() {
+                    @Override
+                    public Boolean call(AVFile avFile) {
+                        if (avFile == null) {
+                            showSimpleDialog(R.string.can_not_find_file);
+                            return false;
+                        }
+                        return true;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<AVFile>() {
+                    @Override
+                    public void call(final AVFile file) {
+                        final ProgressDialog pd = new ProgressDialog(MyDetailsActivity.this);
+                        pd.setMax(100);
+                        pd.show();
+                        file.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(AVException e) {
+                                pd.hide();
+                                if (e != null) {
+                                    showSimpleDialog(R.string.error);
+                                    return;
+                                }
+                                user.imgurl = file.getUrl();
+                                observableUpdate.subscribe(observerUser);
+                            }
+                        }, new ProgressCallback() {
+                            @Override
+                            public void done(Integer integer) {
+                                pd.setProgress(integer);
+                            }
+                        });
+                    }
+                });
     }
 }

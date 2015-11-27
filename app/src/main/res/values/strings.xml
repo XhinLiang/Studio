@@ -44,4 +44,5 @@
     <string name="key_title">Title</string>
     <string name="auther_email">xhinliang@gmail.com</string>
     <string name="no_email_app">No Email App Find.</string>
+    <string name="can_not_find_file">Can\'t Find This File</string>
 </resources>
