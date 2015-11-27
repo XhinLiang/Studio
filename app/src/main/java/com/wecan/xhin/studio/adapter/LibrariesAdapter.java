@@ -20,6 +20,10 @@ import rx.functions.Action1;
  * xhinliang@gmail.com
  */
 public class LibrariesAdapter extends RecyclerView.Adapter<BindingRecyclerView.ViewHolder> {
+
+    private static final int VALUE_TYPE_HEADER = 0;
+    private static final int VALUE_TYPE_LIBRARY = 1;
+
     private List<GitRepository> libraries;
     private LayoutInflater inflater;
     private Listener listener;
@@ -34,13 +38,12 @@ public class LibrariesAdapter extends RecyclerView.Adapter<BindingRecyclerView.V
     public BindingRecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0)
             return new HeaderViewHolder(RecyclerItemHeaderBinding.inflate(inflater, parent, false));
-        else
-            return new ItemViewHolder(RecyclerItemLibraryBinding.inflate(inflater, parent, false));
+        return new ItemViewHolder(RecyclerItemLibraryBinding.inflate(inflater, parent, false));
     }
 
     @Override
     public void onBindViewHolder(BindingRecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 0) {
+        if (holder.getItemViewType() == VALUE_TYPE_HEADER) {
             ((HeaderViewHolder) holder).binding.setName(libraries.get(position).name);
             return;
         }
@@ -50,7 +53,7 @@ public class LibrariesAdapter extends RecyclerView.Adapter<BindingRecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        return libraries.get(position).author == null ? 0 : 1;
+        return libraries.get(position).author == null ? VALUE_TYPE_HEADER : VALUE_TYPE_LIBRARY;
     }
 
     @Override

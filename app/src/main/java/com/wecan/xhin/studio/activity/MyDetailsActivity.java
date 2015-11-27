@@ -54,6 +54,7 @@ public class MyDetailsActivity extends BaseActivity {
         api = App.from(this).createApi(Api.class);
 
         ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle(R.string.updating);
         Observable.Transformer<User, User> networkingIndicator = RxNetworking.bindConnecting(pd);
 
         observableUpdate = Observable
@@ -79,7 +80,7 @@ public class MyDetailsActivity extends BaseActivity {
 
             @Override
             public void onNext(User user) {
-                showSimpleDialog(R.string.succeed);
+                showSimpleDialog(R.string.update,R.string.succeed);
                 MyDetailsActivity.this.user = user;
                 binding.setUser(user);
                 setupImage(binding.ivPicture, binding.getUser().imgurl);
@@ -240,6 +241,7 @@ public class MyDetailsActivity extends BaseActivity {
         if (resultCode != RESULT_OK || requestCode != 1 || data == null)
             return;
         String photo = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS).get(0);
+
         Observable.just(photo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -249,7 +251,6 @@ public class MyDetailsActivity extends BaseActivity {
                         try {
                             return AVFile.withAbsoluteLocalPath(String.format("avatar_%s_%d.jpg", user.name, System.currentTimeMillis()), s);
                         } catch (IOException e) {
-                            e.printStackTrace();
                             return null;
                         }
                     }

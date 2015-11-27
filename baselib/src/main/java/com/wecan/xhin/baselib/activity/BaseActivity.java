@@ -52,6 +52,20 @@ public class BaseActivity extends RxAppCompatActivity {
                 .show();
     }
 
+    protected void showSimpleDialog(int titleRes , int contentRes) {
+        new AlertDialog.Builder(this)
+                .setMessage(contentRes)
+                .setTitle(titleRes)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
+    }
+
     protected void showSimpleDialog(int contentRes) {
         new AlertDialog.Builder(this)
                 .setMessage(contentRes)
