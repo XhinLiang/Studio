@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">Studio</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name">微客工作室</string>
+    <string name="navigation_drawer_open">打开侧边栏</string>
+    <string name="navigation_drawer_close">关闭侧边栏</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_login">注册</string>
-    <!-- Strings related to login -->
     <string name="action_login">登录</string>
     <string name="prompt_name">姓名</string>
     <string name="prompt_phone">电话</string>
@@ -39,5 +37,10 @@
     <string name="action_register">注册</string>
     <string name="error">错误</string>
     <string name="register_fail">注册失败!</string>
+    <string name="key_content">内容</string>
+    <string name="key_title">标题</string>
+    <string name="auther_email">xhinliang@gmail.com</string>
+    <string name="no_email_app">未找到邮件客户端</string>
+    <string name="can_not_find_file">未找到该文件</string>
 
 </resources>

@@ -9,7 +9,6 @@
     <string name="action_login">Login</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_phone">Phone</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="nothing" />
     <string name="code">Code</string>
     <string name="register">Register</string>
