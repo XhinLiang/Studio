@@ -81,6 +81,7 @@ public class MyDetailsActivity extends BaseActivity {
                 showSimpleDialog(R.string.succeed);
                 MyDetailsActivity.this.user = user;
                 binding.setUser(user);
+                setupImage(binding.ivPicture, binding.getUser().imgurl);
             }
         };
 
@@ -168,10 +169,7 @@ public class MyDetailsActivity extends BaseActivity {
         requestManager = Glide.with(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
         setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        }
+        setHasHomeButton();
 
         user = getIntent().getParcelableExtra(KEY_USER);
         binding.setUser(user);

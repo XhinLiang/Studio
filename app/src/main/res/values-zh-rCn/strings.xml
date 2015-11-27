@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Studio</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_login">注册</string>
+    <!-- Strings related to login -->
+    <string name="action_login">登录</string>
+    <string name="prompt_name">姓名</string>
+    <string name="prompt_phone">电话</string>
+    <string name="nothing" />
+    <string name="code">邀请码</string>
+    <string name="register">注册</string>
+    <string name="succeed">成功!</string>
+    <string name="position_no_selected">职位未选择</string>
+    <string name="sex_no_selected">性别未选择</string>
+    <string name="group_no_selected">组别未选择</string>
+    <string name="name_no_input">姓名为空</string>
+    <string name="phone_no_input">电话为空</string>
+    <string name="code_no_input">邀请码为空</string>
+    <string name="name_example">Android Studio</string>
+    <string name="email_example">android.studio@android.com</string>
+    <string name="sign_user">已签到小伙伴</string>
+    <string name="all_user">全部小伙伴</string>
+    <string name="books">书籍</string>
+    <string name="system">系统</string>
+    <string name="me">我</string>
+    <string name="about">关于</string>
+    <string name="version">版本</string>
+    <string name="give_me_star">给我 Star!</string>
+    <string name="thanks_to">感谢 </string>
+    <string name="name">姓名</string>
+    <string name="phone">电话</string>
+    <string name="group">组别</string>
+    <string name="position">职位</string>
+    <string name="description">简介</string>
+    <string name="confirm">确认</string>
+    <string name="action_register">注册</string>
+    <string name="error">错误</string>
+    <string name="register_fail">注册失败!</string>
+
+</resources>

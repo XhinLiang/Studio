@@ -27,10 +27,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
         super.onCreate(savedInstanceState);
         ActivityAboutBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_about);
         setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        }
+        setHasHomeButton();
         libraries.add(new GitRepository(null, "Visit Our Website", null));
         libraries.add(new GitRepository("Xidian", "Wecan Studio", "http://www.wecanstudio.me"));
         libraries.add(new GitRepository(null, "Visit GitHub of This App", null));

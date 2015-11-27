@@ -23,6 +23,13 @@ import rx.functions.Func1;
 public class BaseActivity extends RxAppCompatActivity {
 
 
+    protected void setHasHomeButton(){
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+    }
+
 
 
     public rx.Observable<ViewClickEvent> setRxClick(View view) {

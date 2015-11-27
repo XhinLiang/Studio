@@ -3,18 +3,17 @@ package com.wecan.xhin.studio.activity;
 import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.databinding.ActivityRegisterBinding;
-import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import java.util.concurrent.TimeUnit;
 
@@ -83,17 +82,16 @@ public class RegisterActivity extends BaseActivity {
                         return observableRegister;
                     }
                 })
+                .retry()
                 .subscribe(new Action1<BaseData>() {
                     @Override
                     public void call(BaseData user) {
                         showSimpleDialog(R.string.succeed);
-                        Log.d("Register", "succ");
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        showSimpleDialog(throwable.getMessage());
-                        Log.d("Register", throwable.getMessage());
+                        showSimpleDialog(R.string.register_fail);
                     }
                 });
     }

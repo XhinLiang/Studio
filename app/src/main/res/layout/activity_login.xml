@@ -7,9 +7,9 @@
 
 
     <FrameLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -33,13 +33,14 @@
 
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:hint="@string/prompt_name"
                     android:imeOptions="actionUnspecified"
                     android:singleLine="true" />
@@ -54,7 +55,7 @@
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:hint="@string/prompt_phone"
                     android:imeOptions="actionUnspecified"
                     android:inputType="phone"
@@ -62,19 +63,22 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="16dp"
+                android:background="#388E3C"
                 android:text="@string/action_login"
                 android:textStyle="bold" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_register"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
+                android:background="#388E3C"
+
                 android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_register"
