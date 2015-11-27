@@ -24,23 +24,20 @@ public class UserDetailsActivity extends BaseActivity {
 
     public static final String KEY_USER = "user";
 
-    private RequestManager requestManager;
+    protected RequestManager requestManager;
+    protected ActivityUserDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestManager = Glide.with(this);
-        ActivityUserDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
         setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        }
-
+        setHasHomeButton();
         final User user = getIntent().getParcelableExtra(KEY_USER);
         binding.setUser(user);
-        setupImage(binding.ivPicture, binding.getUser().imgurl);
 
+        setupImage(binding.ivPicture, binding.getUser().imgurl);
         setRxClick(binding.fab)
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override

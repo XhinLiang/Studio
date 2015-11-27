@@ -250,8 +250,8 @@ public class MyDetailsActivity extends BaseActivity {
                             return AVFile.withAbsoluteLocalPath(String.format("avatar_%s_%d.jpg", user.name, System.currentTimeMillis()), s);
                         } catch (IOException e) {
                             e.printStackTrace();
+                            return null;
                         }
-                        return null;
                     }
                 })
                 .filter(new Func1<AVFile, Boolean>() {
@@ -264,6 +264,7 @@ public class MyDetailsActivity extends BaseActivity {
                         return true;
                     }
                 })
+                .compose(this.<AVFile>bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<AVFile>() {
                     @Override

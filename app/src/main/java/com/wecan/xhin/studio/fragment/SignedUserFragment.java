@@ -55,7 +55,7 @@ public class SignedUserFragment extends UsersFragment {
         user = getArguments().getParcelable(KEY_USER);
         if (user == null)
             return;
-        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN ? R.drawable.ic_logout : R.drawable.ic_login);
+        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN ? R.drawable.ic_sign : R.drawable.ic_unsign);
         observableSign = Observable
                 .defer(new Func0<Observable<BaseData>>() {
                     @Override
@@ -83,7 +83,7 @@ public class SignedUserFragment extends UsersFragment {
                         user.status = user.status == User.VALUE_STATUS_UNSIGN ?
                                 User.VALUE_STATUS_SIGN : User.VALUE_STATUS_UNSIGN;
                         fab.setImageResource(user.status == User.VALUE_STATUS_SIGN
-                                ? R.drawable.ic_logout : R.drawable.ic_login);
+                                ? R.drawable.ic_sign : R.drawable.ic_unsign);
                         return observableConnect;
                     }
                 })
