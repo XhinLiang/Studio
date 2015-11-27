@@ -24,8 +24,6 @@ import rx.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
 
-    private static final String TAG = "LoginActivity";
-
     private ActivityLoginBinding binding;
     private Observable<User> observableConnect;
     private Api api;
@@ -40,8 +38,8 @@ public class LoginActivity extends BaseActivity {
 
         Observable.Transformer<User, User> networkingIndicator = RxNetworking.bindConnecting(pd);
 
-        binding.etName.setText("John");
-        binding.etPhone.setText("13434343434");
+        binding.setName(PreferenceHelper.getInstance(this).getString(App.KEY_PREFERENCE_USER, getString(R.string.nothing)));
+        binding.setPhone(PreferenceHelper.getInstance(this).getString(App.KEY_PREFERENCE_PHONE, getString(R.string.nothing)));
 
         observableConnect = Observable
                 //defer操作符是直到有订阅者订阅时，才通过Observable的工厂方法创建Observable并执行
@@ -52,7 +50,6 @@ public class LoginActivity extends BaseActivity {
                         return api.login(binding.etName.getText().toString(), binding.etPhone.getText().toString());
                     }
                 })
-
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);

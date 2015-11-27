@@ -19,7 +19,7 @@ import com.wecan.xhin.studio.databinding.ActivityMainBinding;
 import com.wecan.xhin.studio.databinding.IncludeNavHeaderMainBinding;
 import com.wecan.xhin.studio.fragment.AllUserFragment;
 import com.wecan.xhin.studio.fragment.SignedUserFragment;
-import com.wecan.xhin.studio.fragment.TestFragment;
+import com.wecan.xhin.studio.fragment.BooksFragment;
 
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity {
             case R.id.book:
                 hideFragments(transaction);
                 if (booksFragment == null) {
-                    booksFragment = new TestFragment();
+                    booksFragment = new BooksFragment();
                     transaction.add(R.id.fl_content, booksFragment);
                     break;
                 }

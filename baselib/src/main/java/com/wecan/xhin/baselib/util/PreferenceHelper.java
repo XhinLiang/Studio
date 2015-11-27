@@ -14,8 +14,6 @@ import com.wecan.xhin.baselib.R;
  */
 public class PreferenceHelper {
 
-    public static final String KEY_USERNAME = "username";
-    public static final String KEY_PASSWORD = "password";
 
     private static PreferenceHelper sPreferenceHelper;
     private SharedPreferences mySharedPreferences;
@@ -25,8 +23,8 @@ public class PreferenceHelper {
     public static PreferenceHelper getInstance(Context context) {
         if (sPreferenceHelper == null) {
             sPreferenceHelper = new PreferenceHelper();
-            sPreferenceHelper.mySharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name),
-                    Activity.MODE_PRIVATE);
+            sPreferenceHelper.mySharedPreferences = context.getApplicationContext()
+                    .getSharedPreferences(context.getString(R.string.app_name), Activity.MODE_PRIVATE);
         }
         return sPreferenceHelper;
     }

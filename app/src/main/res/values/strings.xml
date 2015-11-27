@@ -40,4 +40,8 @@
     <string name="action_register">Register</string>
     <string name="error">错误</string>
     <string name="register_fail">Register Fail!</string>
+    <string name="key_content">Content</string>
+    <string name="key_title">Title</string>
+    <string name="auther_email">xhinliang@gmail.com</string>
+    <string name="no_email_app">No Email App Find.</string>
 </resources>
