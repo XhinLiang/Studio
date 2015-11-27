@@ -72,7 +72,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
         data.putExtra(Intent.EXTRA_TEXT, getString(R.string.key_content));
         List<ResolveInfo> rInfo = getPackageManager().queryIntentActivities(data, MODE_PRIVATE);
         if (rInfo.size() == 0) {
-            showSimpleDialog(getString(R.string.no_email_app));
+            showSimpleDialog(R.string.error, R.string.no_email_app);
             return;
         }
         startActivity(data);
@@ -90,4 +90,6 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
         int position = holder.getAdapterPosition();
         viewGitHub(libraries.get(position).url);
     }
+
+
 }

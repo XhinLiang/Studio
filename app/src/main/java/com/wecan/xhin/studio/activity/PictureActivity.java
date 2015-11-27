@@ -28,7 +28,7 @@ public class PictureActivity extends BaseActivity {
     protected boolean mIsHidden = false;
 
     protected void setAppBarAlpha(float alpha) {
-        binding.appBarLayout.setAlpha(alpha);
+        binding.appBar.setAlpha(alpha);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class PictureActivity extends BaseActivity {
     }
 
     protected void hideOrShowToolbar() {
-        binding.appBarLayout.animate()
-                .translationY(mIsHidden ? 0 : -binding.appBarLayout.getHeight())
+        binding.appBar.animate()
+                .translationY(mIsHidden ? 0 : -binding.appBar.getHeight())
                 .setInterpolator(new DecelerateInterpolator(2))
                 .start();
         mIsHidden = !mIsHidden;

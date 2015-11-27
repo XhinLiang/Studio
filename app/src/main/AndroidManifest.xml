@@ -18,16 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar.other">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar.other"/>
+        <activity android:name=".activity.RegisterActivity" />
 
         <activity android:name=".activity.MainActivity" />
 
@@ -37,16 +35,13 @@
 
         <activity android:name=".activity.MyDetailsActivity" />
 
-        <activity android:name=".activity.PictureActivity"
-            android:theme="@style/AppTheme.NoActionBar.other"/>
-
         <activity
-            android:name="me.iwf.photopicker.PhotoPickerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name=".activity.PictureActivity"
+            android:theme="@style/AppTheme.NoActionBar.other" />
 
-        <activity
-            android:name="me.iwf.photopicker.PhotoPagerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity" />
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity" />
 
     </application>
 

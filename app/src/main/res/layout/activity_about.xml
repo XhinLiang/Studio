@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.AboutActivity">
 
-    <data/>
+    <data />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -43,13 +43,13 @@
 
                 </RelativeLayout>
 
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="?homeAsUpIndicator"
-                    app:title="@string/about" />
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
