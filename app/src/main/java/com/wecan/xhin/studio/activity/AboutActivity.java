@@ -5,7 +5,9 @@ import android.content.pm.ResolveInfo;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.R;
@@ -38,6 +40,16 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
                         sendEmail();
+                    }
+                });
+
+        RxView.clickEvents(binding.toolbar)
+                .elementAt(5)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        Log.d("update", "do update...");
                     }
                 });
 

@@ -42,5 +42,6 @@
     <string name="auther_email">xhinliang@gmail.com</string>
     <string name="no_email_app">未找到邮件客户端</string>
     <string name="can_not_find_file">未找到该文件</string>
-
+    <string name="updating">正在更新</string>
+    <string name="update">更新</string>
 </resources>

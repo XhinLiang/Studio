@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.jakewharton.rxbinding.view.ViewClickEvent;
+import com.umeng.update.UmengUpdateAgent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
@@ -89,6 +90,15 @@ public class LoginActivity extends BaseActivity {
                         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                     }
                 });
+
+        setupUmengUpdate();
+    }
+
+
+    private void setupUmengUpdate() {
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setDeltaUpdate(false);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
     }
 }
 
