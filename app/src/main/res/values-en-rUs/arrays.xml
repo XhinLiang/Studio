@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="group_name">
+        <item>Group</item>
+        <item>Web Front</item>
+        <item>Web Back</item>
+        <item>Android</item>
+        <item>iOs</item>
+        <item>Product Manager</item>
+        <item>Designer</item>
+        <item>You Know Nothing</item>
+    </string-array>
+
+    <string-array name="position_name">
+        <item>Position</item>
+        <item>Crew</item>
+        <item>Leader</item>
+        <item>Manager</item>
+        <item>John Snow</item>
+    </string-array>
+
+    <string-array name="sex_name">
+        <item>Sex</item>
+        <item>Boy</item>
+        <item>Girl</item>
+    </string-array>
+</resources>

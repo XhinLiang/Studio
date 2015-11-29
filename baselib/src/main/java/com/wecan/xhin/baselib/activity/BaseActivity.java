@@ -20,8 +20,7 @@ import rx.functions.Func1;
  * Created by xhinliang on 15-11-23.
  * xhinliang@gmail.com
  */
-public class BaseActivity extends RxAppCompatActivity {
-
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected void setHasHomeButton() {
         if (getSupportActionBar() != null) {

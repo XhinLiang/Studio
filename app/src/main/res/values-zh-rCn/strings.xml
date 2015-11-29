@@ -46,4 +46,7 @@
     <string name="change_phone">更新电话</string>
     <string name="change_position">更新职位</string>
     <string name="change_group">更新组别</string>
+    <string name="add_code_result">添加结果</string>
+    <string name="fail">失败</string>
+    <string name="add_code">添加邀请码</string>
 </resources>

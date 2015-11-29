@@ -33,15 +33,15 @@
             android:id="@+id/umeng_common_icon_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:scaleType="center"
             android:contentDescription="@string/umeng_common_icon"
-            android:src="@android:drawable/stat_sys_download"/>
+            android:scaleType="center"
+            android:src="@android:drawable/stat_sys_download" />
     </FrameLayout>
 
     <RelativeLayout
@@ -49,12 +49,15 @@
         android:layout_height="fill_parent"
         android:clickable="true"
         android:focusable="true"
-        android:paddingLeft="7dp">
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp">
 
         <LinearLayout
             android:id="@+id/umeng_common_notification_controller"
+            style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="3dp"
@@ -63,16 +66,8 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/umeng_common_rich_notification_continue"
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:background="@drawable/umeng_common_gradient_orange"
-                android:singleLine="true"
-                android:text="@string/umeng_common_action_pause"
-                android:textSize="12sp"/>
-
-            <Button
                 android:id="@+id/umeng_common_rich_notification_cancel"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="50dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="2dp"
@@ -80,7 +75,19 @@
                 android:background="@drawable/umeng_common_gradient_red"
                 android:singleLine="true"
                 android:text="@string/umeng_common_action_cancel"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/umeng_common_rich_notification_continue"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:background="@drawable/umeng_common_gradient_orange"
+                android:singleLine="true"
+                android:text="@string/umeng_common_action_pause"
+                android:textSize="12sp" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -89,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/umeng_common_notification_controller"
+            android:layout_toStartOf="@id/umeng_common_notification_controller"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical"
@@ -101,7 +109,7 @@
                 android:singleLine="true"
                 android:textColor="?android:attr/textColorPrimaryInverse"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/umeng_common_progress_text"
@@ -109,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textColor="?android:attr/textColorPrimaryInverse"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ProgressBar
@@ -119,7 +127,8 @@
             android:layout_height="12dp"
             android:layout_alignParentBottom="true"
             android:paddingBottom="8dp"
-            android:paddingRight="25dp"/>
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp" />
     </RelativeLayout>
 
 </LinearLayout>

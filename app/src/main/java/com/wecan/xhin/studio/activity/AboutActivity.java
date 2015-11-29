@@ -1,18 +1,25 @@
 package com.wecan.xhin.studio.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
+import android.widget.EditText;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
+import com.wecan.xhin.baselib.rx.RxNetworking;
+import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.adapter.LibrariesAdapter;
+import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.GitRepository;
+import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.databinding.ActivityAboutBinding;
 
 import java.util.LinkedList;
@@ -21,6 +28,7 @@ import java.util.List;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -31,6 +39,8 @@ import rx.schedulers.Schedulers;
 public class AboutActivity extends BaseActivity implements LibrariesAdapter.Listener {
 
     private List<GitRepository> libraries = new LinkedList<>();
+    private Api api;
+    private Observable.Transformer<BaseData, BaseData> networkingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +63,59 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        Log.d("update", "do update...");
+                        addCode();
                     }
                 });
 
         setupRecyclerView(binding);
+        initData();
+    }
+
+    private void initData() {
+        api = App.from(this).createApi(Api.class);
+        ProgressDialog pd = new ProgressDialog(this);
+        networkingIndicator = RxNetworking.bindConnecting(pd);
+    }
+
+    private void addCodeToServer(final String code) {
+        Observable
+                .defer(new Func0<Observable<BaseData>>() {
+                    @Override
+                    public Observable<BaseData> call() {
+                        return api.addCode(code);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(networkingIndicator)
+                .compose(AboutActivity.this.<BaseData>bindToLifecycle())
+                .subscribe(new Action1<BaseData>() {
+                    @Override
+                    public void call(BaseData baseData) {
+                        showSimpleDialog(R.string.add_code_result, R.string.succeed);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        showSimpleDialog(R.string.add_code_result, R.string.fail);
+                    }
+                });
+    }
+
+    private void addCode() {
+        final EditText editText = new EditText(this);
+        editText.setHint(R.string.add_code);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.add_code)
+                .setView(editText)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addCodeToServer(editText.getText().toString());
+                    }
+                })
+                .create()
+                .show();
     }
 
     private void setupRecyclerView(ActivityAboutBinding binding) {

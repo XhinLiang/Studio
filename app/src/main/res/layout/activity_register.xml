@@ -109,7 +109,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/code"
                     android:imeOptions="actionUnspecified"
-                    android:inputType="phone"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>

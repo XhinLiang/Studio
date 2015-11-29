@@ -13,6 +13,7 @@ import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
@@ -41,5 +42,7 @@ public interface Api {
     @GET("api/message")
     Observable<UsersData> getSignedUser();
 
+    @GET("api/addplease/{code}")
+    Observable<BaseData> addCode(@Path("code") String code);
 
 }
