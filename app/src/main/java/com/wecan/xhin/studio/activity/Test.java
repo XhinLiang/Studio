@@ -9,6 +9,7 @@ import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import rx.Observer;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -33,6 +34,14 @@ public class Test extends RxAppCompatActivity {
                         return 5 / i;
                     }
                 })
+                .doOnError(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Log.d("Test", "Error");
+
+                    }
+                })
+                .retry()
                 .compose(this.<Integer>bindToLifecycle())
                 .subscribe(new Observer<Integer>() {
                     @Override

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
 import com.wecan.xhin.baselib.rx.RxNetworking;
@@ -15,13 +14,10 @@ import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.up.RegisterBody;
 import com.wecan.xhin.studio.databinding.ActivityRegisterBinding;
 
-import java.util.concurrent.TimeUnit;
-
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -45,7 +41,6 @@ public class RegisterActivity extends BaseActivity {
         }
         api = App.from(this).createApi(Api.class);
         ProgressDialog pd = new ProgressDialog(this);
-
         Observable.Transformer<BaseData, BaseData> networkingIndicator = RxNetworking.bindConnecting(pd);
 
         observableRegister = Observable
@@ -67,26 +62,34 @@ public class RegisterActivity extends BaseActivity {
                 .compose(networkingIndicator);
 
 
-        RxView.clickEvents(binding.btnRegister)
-                .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms
+        setRxClick(binding.btnRegister)
                 .filter(new SpinnerFilter(binding.acpGroupName, R.string.group_no_selected))
                 .filter(new SpinnerFilter(binding.acpSex, R.string.sex_no_selected))
                 .filter(new SpinnerFilter(binding.acpPosition, R.string.position_no_selected))
                 .filter(new EditTextFilter(binding.etName, R.string.name_no_input))
                 .filter(new EditTextFilter(binding.etPhone, R.string.phone_no_input))
                 .filter(new EditTextFilter(binding.etCode, R.string.code_no_input))
-                .flatMap(new Func1<ViewClickEvent, Observable<BaseData>>() {
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .subscribe(new Action1<ViewClickEvent>() {
                     @Override
-                    public Observable<BaseData> call(ViewClickEvent viewClickEvent) {
-                        return observableRegister;
+                    public void call(ViewClickEvent event) {
+                        register();
                     }
-                })
+                });
+    }
+
+    private void register() {
+        observableRegister
                 .compose(this.<BaseData>bindToLifecycle())
-                .onErrorResumeNext(Observable.just(new BaseData()))
                 .subscribe(new Action1<BaseData>() {
                     @Override
-                    public void call(BaseData user) {
-                        showSimpleDialog(user.status == 1 ? R.string.succeed : R.string.register_fail);
+                    public void call(BaseData baseData) {
+                        showSimpleDialog(baseData.status == 1 ? R.string.succeed : R.string.register_fail);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        showSimpleDialog(R.string.register_fail);
                     }
                 });
     }

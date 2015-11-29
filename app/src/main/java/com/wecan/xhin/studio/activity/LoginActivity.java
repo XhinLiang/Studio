@@ -9,19 +9,18 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.umeng.update.UmengUpdateAgent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
+import com.wecan.xhin.baselib.rx.RxNetworking;
+import com.wecan.xhin.baselib.util.PreferenceHelper;
 import com.wecan.xhin.studio.App;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityLoginBinding;
-import com.wecan.xhin.baselib.rx.RxNetworking;
-import com.wecan.xhin.baselib.util.PreferenceHelper;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
@@ -59,12 +58,28 @@ public class LoginActivity extends BaseActivity {
         RxView.clickEvents(binding.btnLogin)
                 .filter(new EditTextFilter(binding.etName, R.string.name_no_input))
                 .filter(new EditTextFilter(binding.etPhone, R.string.phone_no_input))
-                .flatMap(new Func1<ViewClickEvent, Observable<User>>() {
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .subscribe(new Action1<ViewClickEvent>() {
                     @Override
-                    public Observable<User> call(ViewClickEvent viewClickEvent) {
-                        return observableConnect;
+                    public void call(ViewClickEvent viewClickEvent) {
+                        login();
                     }
-                })
+                });
+
+        setRxClick(binding.btnRegister)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .subscribe(new Action1<ViewClickEvent>() {
+                    @Override
+                    public void call(ViewClickEvent viewClickEvent) {
+                        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                    }
+                });
+
+        setupUmengUpdate();
+    }
+
+    private void login() {
+        observableConnect
                 .compose(this.<User>bindToLifecycle())
                 .subscribe(new Action1<User>() {
                     @Override
@@ -80,16 +95,6 @@ public class LoginActivity extends BaseActivity {
                         showSimpleDialog(throwable.getMessage());
                     }
                 });
-
-        setRxClick(binding.btnRegister)
-                .subscribe(new Action1<ViewClickEvent>() {
-                    @Override
-                    public void call(ViewClickEvent viewClickEvent) {
-                        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                    }
-                });
-
-        setupUmengUpdate();
     }
 
 
