@@ -23,7 +23,7 @@ import rx.functions.Func1;
 public class BaseActivity extends RxAppCompatActivity {
 
 
-    protected void setHasHomeButton(){
+    protected void setHasHomeButton() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -31,10 +31,8 @@ public class BaseActivity extends RxAppCompatActivity {
     }
 
 
-
     public rx.Observable<ViewClickEvent> setRxClick(View view) {
         return RxView.clickEvents(view)
-                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .throttleFirst(500, TimeUnit.MILLISECONDS);
     }
 
@@ -52,7 +50,7 @@ public class BaseActivity extends RxAppCompatActivity {
                 .show();
     }
 
-    protected void showSimpleDialog(int titleRes , int contentRes) {
+    protected void showSimpleDialog(int titleRes, int contentRes) {
         new AlertDialog.Builder(this)
                 .setMessage(contentRes)
                 .setTitle(titleRes)

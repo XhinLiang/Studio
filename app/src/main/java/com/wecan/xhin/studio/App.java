@@ -11,8 +11,8 @@ import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
-import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.baselib.net.LoggingInterceptor;
+import com.wecan.xhin.studio.api.Api;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -70,6 +70,8 @@ public class App extends Application {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .setDateFormat(DATE_FORMAT_PATTERN)
                 .create();
+
+
 
         //初始化Retrofit
         retrofit = new Retrofit.Builder()

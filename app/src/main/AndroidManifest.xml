@@ -35,13 +35,17 @@
 
         <activity android:name=".activity.MyDetailsActivity" />
 
+        <activity android:name=".activity.PictureActivity" />
+
+        <activity android:name=".activity.Test" />
+
         <activity
-            android:name=".activity.PictureActivity"
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/AppTheme.NoActionBar.other" />
 
-        <activity android:name="me.iwf.photopicker.PhotoPickerActivity" />
-
-        <activity android:name="me.iwf.photopicker.PhotoPagerActivity" />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/AppTheme.NoActionBar.other" />
 
 
         <service

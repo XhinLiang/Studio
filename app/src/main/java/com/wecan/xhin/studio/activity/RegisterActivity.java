@@ -68,7 +68,6 @@ public class RegisterActivity extends BaseActivity {
 
 
         RxView.clickEvents(binding.btnRegister)
-                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms
                 .filter(new SpinnerFilter(binding.acpGroupName, R.string.group_no_selected))
                 .filter(new SpinnerFilter(binding.acpSex, R.string.sex_no_selected))
@@ -82,16 +81,12 @@ public class RegisterActivity extends BaseActivity {
                         return observableRegister;
                     }
                 })
-                .retry()
+                .compose(this.<BaseData>bindToLifecycle())
+                .onErrorResumeNext(Observable.just(new BaseData()))
                 .subscribe(new Action1<BaseData>() {
                     @Override
                     public void call(BaseData user) {
-                        showSimpleDialog(R.string.succeed);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        showSimpleDialog(R.string.register_fail);
+                        showSimpleDialog(user.status == 1 ? R.string.succeed : R.string.register_fail);
                     }
                 });
     }

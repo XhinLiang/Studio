@@ -25,4 +25,5 @@ package com.wecan.xhin.studio.bean.down;
  */
 public class BaseData {
     public int status;
+    public String message;
 }

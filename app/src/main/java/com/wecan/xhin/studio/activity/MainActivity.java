@@ -57,13 +57,13 @@ public class MainActivity extends BaseActivity {
 
 
         RxNavigationView.itemSelections(binding.navView)
-                .compose(this.<MenuItem>bindToLifecycle())
                 .map(new Func1<MenuItem, Integer>() {
                     @Override
                     public Integer call(MenuItem menuItem) {
                         return menuItem.getItemId();
                     }
                 })
+                .compose(this.<Integer>bindToLifecycle())
                 .subscribe(new Action1<Integer>() {
                     @Override
                     public void call(Integer menuItem) {

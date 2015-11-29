@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.umeng.update.UmengUpdateAgent;
 import com.wecan.xhin.baselib.activity.BaseActivity;
@@ -55,7 +56,7 @@ public class LoginActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);
 
-        setRxClick(binding.btnLogin)
+        RxView.clickEvents(binding.btnLogin)
                 .filter(new EditTextFilter(binding.etName, R.string.name_no_input))
                 .filter(new EditTextFilter(binding.etPhone, R.string.phone_no_input))
                 .flatMap(new Func1<ViewClickEvent, Observable<User>>() {
@@ -64,16 +65,13 @@ public class LoginActivity extends BaseActivity {
                         return observableConnect;
                     }
                 })
-                .retry()
+                .compose(this.<User>bindToLifecycle())
                 .subscribe(new Action1<User>() {
                     @Override
                     public void call(User user) {
-                        PreferenceHelper.getInstance(LoginActivity.this)
-                                .saveParam(App.KEY_PREFERENCE_USER, binding.etName.getText().toString());
-                        PreferenceHelper.getInstance(LoginActivity.this)
-                                .saveParam(App.KEY_PREFERENCE_PHONE, binding.etPhone.getText().toString());
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class)
-                                .putExtra(MainActivity.KEY_USER, user));
+                        PreferenceHelper.getInstance(LoginActivity.this).saveParam(App.KEY_PREFERENCE_USER, binding.etName.getText().toString());
+                        PreferenceHelper.getInstance(LoginActivity.this).saveParam(App.KEY_PREFERENCE_PHONE, binding.etPhone.getText().toString());
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra(MainActivity.KEY_USER, user));
                         finish();
                     }
                 }, new Action1<Throwable>() {
