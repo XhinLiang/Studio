@@ -42,18 +42,18 @@ import rx.schedulers.Schedulers;
 public class MyDetailsActivity extends BaseActivity {
 
     public static final String KEY_USER = "user";
+    public static final int REQUEST_FOR_SELECT_PICTURE = 1;
 
     private ActivityUserDetailsBinding binding;
     private RequestManager requestManager;
     private Observable<User> observableUpdate;
     private Observer<User> observerUser;
+    private ProgressDialog pd;
     private User user;
     private Api api;
 
     private void setAsCurrentUser() {
-        api = App.from(this).createApi(Api.class);
-
-        ProgressDialog pd = new ProgressDialog(this);
+        setupImage(binding.ivPicture, binding.getUser().imgurl);
         pd.setTitle(R.string.updating);
         Observable.Transformer<User, User> networkingIndicator = RxNetworking.bindConnecting(pd);
 
@@ -80,7 +80,7 @@ public class MyDetailsActivity extends BaseActivity {
 
             @Override
             public void onNext(User user) {
-                showSimpleDialog(R.string.update,R.string.succeed);
+                showSimpleDialog(R.string.update, R.string.succeed);
                 MyDetailsActivity.this.user = user;
                 binding.setUser(user);
                 setupImage(binding.ivPicture, binding.getUser().imgurl);
@@ -90,21 +90,23 @@ public class MyDetailsActivity extends BaseActivity {
         binding.fab.setImageResource(android.R.drawable.ic_menu_camera);
 
         setRxClick(binding.fab)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
                         PhotoPickerIntent intent = new PhotoPickerIntent(MyDetailsActivity.this);
                         intent.setPhotoCount(1);
                         intent.setShowCamera(true);
-                        startActivityForResult(intent, 1);
+                        startActivityForResult(intent, REQUEST_FOR_SELECT_PICTURE);
                     }
                 });
 
         setRxClick(binding.mrlPhone)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        setTextArg("name", user.phone, new SetTextArgCallback() {
+                        setTextArg(R.string.change_phone, user.phone, new SetTextArgCallback() {
                             @Override
                             public void onConfirm(CharSequence update) {
                                 user.phone = update.toString();
@@ -115,10 +117,11 @@ public class MyDetailsActivity extends BaseActivity {
                 });
 
         setRxClick(binding.mrlGroup)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        setIntArg("Group", R.array.group_name, user.group_name, new SetIntArgCallback() {
+                        setIntArg(R.string.change_group, R.array.group_name, user.group_name, new SetIntArgCallback() {
                             @Override
                             public void onConfirm(int update) {
                                 user.group_name = update;
@@ -129,10 +132,11 @@ public class MyDetailsActivity extends BaseActivity {
                 });
 
         setRxClick(binding.mrlPosition)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        setIntArg("Position", R.array.position_name, user.position, new SetIntArgCallback() {
+                        setIntArg(R.string.change_position, R.array.position_name, user.position, new SetIntArgCallback() {
                             @Override
                             public void onConfirm(int update) {
                                 user.position = update;
@@ -143,10 +147,11 @@ public class MyDetailsActivity extends BaseActivity {
                 });
 
         setRxClick(binding.mrlDescription)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        setTextArg("description", user.description, new SetTextArgCallback() {
+                        setTextArg(R.string.change_description, user.description, new SetTextArgCallback() {
                             @Override
                             public void onConfirm(CharSequence update) {
                                 user.description = update.toString();
@@ -172,9 +177,12 @@ public class MyDetailsActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details);
         setSupportActionBar(binding.toolbar);
         setHasHomeButton();
+        api = App.from(this).createApi(Api.class);
+        pd = new ProgressDialog(this);
+
         user = getIntent().getParcelableExtra(KEY_USER);
         binding.setUser(user);
-        setupImage(binding.ivPicture, binding.getUser().imgurl);
+
         setAsCurrentUser();
         setRxClick(binding.ivPicture)
                 .subscribe(new Action1<ViewClickEvent>() {
@@ -205,12 +213,12 @@ public class MyDetailsActivity extends BaseActivity {
         void onConfirm(int update);
     }
 
-    private void setTextArg(CharSequence title, CharSequence source, final SetTextArgCallback callback) {
+    private void setTextArg(int titleRes, CharSequence source, final SetTextArgCallback callback) {
         final EditText editText = new EditText(this);
         editText.setText(source);
         new AlertDialog.Builder(this)
                 .setView(editText)
-                .setTitle(title)
+                .setTitle(titleRes)
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -221,9 +229,9 @@ public class MyDetailsActivity extends BaseActivity {
                 .show();
     }
 
-    private void setIntArg(CharSequence title, int resID, int source, final SetIntArgCallback callback) {
+    private void setIntArg(int titleRes, int resID, int source, final SetIntArgCallback callback) {
         new AlertDialog.Builder(this)
-                .setTitle(title)
+                .setTitle(titleRes)
                 .setSingleChoiceItems(resID, source, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -238,10 +246,10 @@ public class MyDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK || requestCode != 1 || data == null)
+        if (resultCode != RESULT_OK || requestCode != REQUEST_FOR_SELECT_PICTURE || data == null)
             return;
-        String photo = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS).get(0);
 
+        String photo = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS).get(0);
         Observable.just(photo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -265,8 +273,8 @@ public class MyDetailsActivity extends BaseActivity {
                         return true;
                     }
                 })
-                .compose(this.<AVFile>bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<AVFile>bindToLifecycle())
                 .subscribe(new Action1<AVFile>() {
                     @Override
                     public void call(final AVFile file) {

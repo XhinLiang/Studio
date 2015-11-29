@@ -39,10 +39,11 @@ public class UserDetailsActivity extends BaseActivity {
 
         setupImage(binding.ivPicture, binding.getUser().imgurl);
         setRxClick(binding.fab)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + user.phone));
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + user.phone));
                         //打电话有可能被拒绝
                         if (ActivityCompat.checkSelfPermission(UserDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             return;
@@ -52,6 +53,7 @@ public class UserDetailsActivity extends BaseActivity {
                 });
 
         setRxClick(binding.ivPicture)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {

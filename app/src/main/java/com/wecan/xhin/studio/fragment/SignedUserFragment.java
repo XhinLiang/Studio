@@ -2,17 +2,16 @@ package com.wecan.xhin.studio.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.jakewharton.rxbinding.view.ViewClickEvent;
+import com.wecan.xhin.baselib.rx.RxNetworking;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.bean.down.BaseData;
 import com.wecan.xhin.studio.bean.down.UsersData;
 import com.wecan.xhin.studio.bean.up.SignBody;
-import com.wecan.xhin.baselib.rx.RxNetworking;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -46,16 +45,12 @@ public class SignedUserFragment extends UsersFragment {
         super.onViewCreated(view, savedInstanceState);
         ProgressDialog pd = new ProgressDialog(getActivity());
         networkingIndicator = RxNetworking.bindConnecting(pd);
-        setEvent((FloatingActionButton) view.findViewById(R.id.fab_sign));
+        initView();
+        setEvent();
     }
 
 
-    protected void setEvent(final FloatingActionButton fab) {
-        fab.setVisibility(View.VISIBLE);
-        user = getArguments().getParcelable(KEY_USER);
-        if (user == null)
-            return;
-        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN ? R.drawable.ic_sign : R.drawable.ic_unsign);
+    protected void setEvent() {
         observableSign = Observable
                 .defer(new Func0<Observable<BaseData>>() {
                     @Override
@@ -69,20 +64,24 @@ public class SignedUserFragment extends UsersFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(networkingIndicator);
 
-        setRxView(fab)
-                .flatMap(new Func1<ViewClickEvent, Observable<BaseData>>() {
+        setRxView(binding.fabSign)
+                .compose(this.<ViewClickEvent>bindToLifecycle())
+                .subscribe(new Action1<ViewClickEvent>() {
                     @Override
-                    public Observable<BaseData> call(ViewClickEvent viewClickEvent) {
-                        return observableSign;
+                    public void call(ViewClickEvent event) {
+                        signOrUnsign();
                     }
-                })
-                .retry()
+                });
+    }
+
+    private void signOrUnsign() {
+        observableSign
                 .flatMap(new Func1<BaseData, Observable<UsersData>>() {
                     @Override
                     public Observable<UsersData> call(BaseData baseData) {
                         user.status = user.status == User.VALUE_STATUS_UNSIGN ?
                                 User.VALUE_STATUS_SIGN : User.VALUE_STATUS_UNSIGN;
-                        fab.setImageResource(user.status == User.VALUE_STATUS_SIGN
+                        binding.fabSign.setImageResource(user.status == User.VALUE_STATUS_SIGN
                                 ? R.drawable.ic_sign : R.drawable.ic_unsign);
                         return observableConnect;
                     }
@@ -94,6 +93,15 @@ public class SignedUserFragment extends UsersFragment {
                         users.addAll(baseData.data);
                     }
                 }, errorAction);
+    }
+
+    private void initView() {
+        binding.fabSign.setVisibility(View.VISIBLE);
+        user = getArguments().getParcelable(KEY_USER);
+        if (user == null) {
+            return;
+        }
+        binding.fabSign.setImageResource(user.status == User.VALUE_STATUS_SIGN ? R.drawable.ic_sign : R.drawable.ic_unsign);
     }
 
     @Override

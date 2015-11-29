@@ -18,7 +18,11 @@ import com.wecan.xhin.studio.databinding.ActivityAboutBinding;
 import java.util.LinkedList;
 import java.util.List;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xhinliang on 15-11-23.
@@ -39,7 +43,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        sendEmail();
+                        composeEmail(getString(R.string.auther_email));
                     }
                 });
 
@@ -77,17 +81,37 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
         binding.libraries.setAdapter(new LibrariesAdapter(libraries, getLayoutInflater(), this));
     }
 
-    private void sendEmail() {
-        Intent data = new Intent(Intent.ACTION_SENDTO);
-        data.setData(Uri.parse(getString(R.string.auther_email)));
-        data.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.key_title));
-        data.putExtra(Intent.EXTRA_TEXT, getString(R.string.key_content));
-        List<ResolveInfo> rInfo = getPackageManager().queryIntentActivities(data, MODE_PRIVATE);
-        if (rInfo.size() == 0) {
-            showSimpleDialog(R.string.error, R.string.no_email_app);
-            return;
-        }
-        startActivity(data);
+
+    public void composeEmail(String address) {
+        final Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, address);
+        Observable.just(intent)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<Intent, List<ResolveInfo>>() {
+                    @Override
+                    public List<ResolveInfo> call(Intent intent) {
+                        return getPackageManager().queryIntentActivities(intent, MODE_PRIVATE);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(new Func1<List<ResolveInfo>, Boolean>() {
+                    @Override
+                    public Boolean call(List<ResolveInfo> resolveInfo) {
+                        if (resolveInfo.size() == 0) {
+                            showSimpleDialog(R.string.no_email_app);
+                            return false;
+                        }
+                        return true;
+                    }
+                })
+                .compose(this.<List<ResolveInfo>>bindToLifecycle())
+                .subscribe(new Action1<List<ResolveInfo>>() {
+                    @Override
+                    public void call(List<ResolveInfo> resolveInfo) {
+                        startActivity(intent);
+                    }
+                });
     }
 
     private void viewGitHub(String url) {

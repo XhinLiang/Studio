@@ -3,8 +3,6 @@ package com.wecan.xhin.studio.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
-import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,8 +22,6 @@ public class PictureActivity extends BaseActivity {
     private PhotoViewAttacher mPhotoViewAttacher;
     private ActivityPictureBinding binding;
     private RequestManager requestManager;
-
-    protected boolean mIsHidden = false;
 
     protected void setAppBarAlpha(float alpha) {
         binding.appBar.setAlpha(alpha);
@@ -57,23 +53,9 @@ public class PictureActivity extends BaseActivity {
                 .into(image);
     }
 
-    protected void hideOrShowToolbar() {
-        binding.appBar.animate()
-                .translationY(mIsHidden ? 0 : -binding.appBar.getHeight())
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
-        mIsHidden = !mIsHidden;
-    }
-
 
     private void setupPhotoAttacher() {
         mPhotoViewAttacher = new PhotoViewAttacher(binding.picture);
-        mPhotoViewAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
-            @Override
-            public void onViewTap(View view, float x, float y) {
-                hideOrShowToolbar();
-            }
-        });
     }
 
     @Override

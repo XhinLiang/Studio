@@ -46,4 +46,8 @@
     <string name="can_not_find_file">Can\'t Find This File</string>
     <string name="updating">Updating</string>
     <string name="update">Update</string>
+    <string name="change_description">Change Description</string>
+    <string name="change_phone">Change Phone</string>
+    <string name="change_position">Change Position</string>
+    <string name="change_group">Change Group</string>
 </resources>
