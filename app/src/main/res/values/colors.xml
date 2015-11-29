@@ -9,4 +9,5 @@
     <color name="green">#16990c</color>
     <color name="blue">#450cb9</color>
     <color name="background">#d4e5efef</color>
+    <color name="lite_blue">#ff359ff2</color>
 </resources>

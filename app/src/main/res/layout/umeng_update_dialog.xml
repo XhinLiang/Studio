@@ -28,6 +28,7 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:contentDescription="@string/UMGprsCondition"
                 android:src="@android:color/transparent"/>
 
@@ -44,8 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:focusable="true"
                 android:visibility="gone"
                 android:background="@drawable/umeng_update_button_close_bg_selector"/>
@@ -73,7 +76,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- Ignore CheckBox -->
 
         <CheckBox
             android:visibility="gone"
@@ -103,10 +105,11 @@
                 android:layout_height="@dimen/material_button_height"
                 android:layout_weight="1"
                 android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:background="@android:color/transparent"
                 android:text="@string/UMNotNow"
                 android:focusable="true"
-                android:textColor="@color/md_black_1000"/>
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/umeng_update_id_ok"
