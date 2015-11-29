@@ -17,8 +17,6 @@
     <string name="name_no_input">姓名为空</string>
     <string name="phone_no_input">电话为空</string>
     <string name="code_no_input">邀请码为空</string>
-    <string name="name_example">Android Studio</string>
-    <string name="email_example">android.studio@android.com</string>
     <string name="sign_user">已签到小伙伴</string>
     <string name="all_user">全部小伙伴</string>
     <string name="books">书籍</string>
@@ -39,9 +37,13 @@
     <string name="register_fail">注册失败!</string>
     <string name="key_content">内容</string>
     <string name="key_title">标题</string>
-    <string name="auther_email">xhinliang@gmail.com</string>
+    <string name="author_email">xhinliang@gmail.com</string>
     <string name="no_email_app">未找到邮件客户端</string>
     <string name="can_not_find_file">未找到该文件</string>
     <string name="updating">正在更新</string>
     <string name="update">更新</string>
+    <string name="change_description">更新简介</string>
+    <string name="change_phone">更新电话</string>
+    <string name="change_position">更新职位</string>
+    <string name="change_group">更新组别</string>
 </resources>

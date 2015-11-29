@@ -19,8 +19,6 @@
     <string name="name_no_input">Name is Empty</string>
     <string name="phone_no_input">Phone is Empty</string>
     <string name="code_no_input">Code is Empty</string>
-    <string name="name_example">Android Studio</string>
-    <string name="email_example">android.studio@android.com</string>
     <string name="sign_user">Sign User</string>
     <string name="all_user">All User</string>
     <string name="books">Books</string>
@@ -37,11 +35,11 @@
     <string name="description">Description</string>
     <string name="confirm">Confirm</string>
     <string name="action_register">Register</string>
-    <string name="error">错误</string>
+    <string name="error">Error</string>
     <string name="register_fail">Register Fail!</string>
     <string name="key_content">Content</string>
     <string name="key_title">Title</string>
-    <string name="auther_email">xhinliang@gmail.com</string>
+    <string name="author_email">xhinliang@gmail.com</string>
     <string name="no_email_app">No Email App Find.</string>
     <string name="can_not_find_file">Can\'t Find This File</string>
     <string name="updating">Updating</string>

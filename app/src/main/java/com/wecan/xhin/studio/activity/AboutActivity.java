@@ -43,7 +43,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
                 .subscribe(new Action1<ViewClickEvent>() {
                     @Override
                     public void call(ViewClickEvent viewClickEvent) {
-                        composeEmail(getString(R.string.auther_email));
+                        composeEmail(getString(R.string.author_email));
                     }
                 });
 
