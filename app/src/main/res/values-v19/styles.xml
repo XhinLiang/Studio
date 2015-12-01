@@ -5,4 +5,8 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="ScrollTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
 </resources>

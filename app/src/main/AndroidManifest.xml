@@ -29,24 +29,39 @@
 
         <activity android:name=".activity.MainActivity" />
 
-        <activity android:name=".activity.AboutActivity" />
-
-        <activity android:name=".activity.UserDetailsActivity" />
-
-        <activity android:name=".activity.MyDetailsActivity" />
-
         <activity android:name=".activity.PictureActivity" />
 
-        <activity android:name=".activity.Test" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/ScrollTheme" />
 
-        <activity android:name="me.iwf.photopicker.PhotoPickerActivity" />
+        <activity
+            android:name=".activity.UserDetailsActivity"
+            android:theme="@style/ScrollTheme" />
+        <activity
+            android:name=".activity.MyDetailsActivity"
+            android:theme="@style/ScrollTheme" />
 
-        <activity android:name="me.iwf.photopicker.PhotoPagerActivity" />
 
+        <!--PhotoPicker选择相片相关-->
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!--PhotoPicker选择相片相关-->
+
+
+        <!--友盟自动更新相关-->
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" />
+
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -58,6 +73,8 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Channel ID" />
+
+        <!--友盟自动更新相关-->
 
     </application>
 
