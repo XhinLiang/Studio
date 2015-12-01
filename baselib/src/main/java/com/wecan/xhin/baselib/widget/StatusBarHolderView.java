@@ -6,6 +6,10 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * Created by xhinliang on 15-12-1.
+ * xhinliang@gmail.com
+ */
 public class StatusBarHolderView extends View {
 
     private final int height;
