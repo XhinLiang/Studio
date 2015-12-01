@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        showSimpleDialog(throwable.getMessage());
+                        showSimpleDialog(R.string.login_fail,throwable.getMessage());
                     }
                 });
     }

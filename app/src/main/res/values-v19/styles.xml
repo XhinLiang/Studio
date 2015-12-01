@@ -16,21 +16,4 @@
         <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
-    <style name="MaterialButton">
-        <item name="android:layout_height">@dimen/material_button_height</item>
-        <item name="android:background">@drawable/bg_material_button_lite_blue</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/material_button_text_size</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="LightToolbarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 </resources>
