@@ -53,7 +53,6 @@ public class PictureActivity extends BaseActivity {
                 .into(image);
     }
 
-
     private void setupPhotoAttacher() {
         mPhotoViewAttacher = new PhotoViewAttacher(binding.picture);
     }

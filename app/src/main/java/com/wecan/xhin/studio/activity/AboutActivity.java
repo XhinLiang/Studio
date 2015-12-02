@@ -140,7 +140,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
     }
 
 
-    public void composeEmail(String address) {
+    private void composeEmail(String address) {
         final Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, address);
