@@ -23,9 +23,10 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?colorPrimary"
+                app:title="@string/about"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="?colorPrimary"
-                app:titleEnabled="false">
+                app:titleEnabled="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

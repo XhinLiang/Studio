@@ -5,7 +5,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme" parent="@style/BaseTheme"/>
+    <style name="AppTheme" parent="@style/BaseTheme" />
+
+    <style name="ScrollTheme" parent="AppTheme" />
 
 
     <style name="MaterialButton">
@@ -24,6 +26,6 @@
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="LightToolbarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="LightToolbarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>

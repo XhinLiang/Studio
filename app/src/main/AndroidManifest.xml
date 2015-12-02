@@ -31,6 +31,8 @@
 
         <activity android:name=".activity.PictureActivity" />
 
+        <!--在4.4无法兼容沉浸式状态栏和CoordinatorLayout的组合滑动效果-->
+
         <activity
             android:name=".activity.AboutActivity"
             android:theme="@style/ScrollTheme" />
@@ -42,6 +44,7 @@
             android:name=".activity.MyDetailsActivity"
             android:theme="@style/ScrollTheme" />
 
+        <!--在4.4无法兼容沉浸式状态栏和CoordinatorLayout的组合滑动效果-->
 
         <!--PhotoPicker选择相片相关-->
 
