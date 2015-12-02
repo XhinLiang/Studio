@@ -132,7 +132,7 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
         libraries.add(new GitRepository("JakeWharton", "RxBinding", "https://github.com/JakeWharton/RxBinding"));
         libraries.add(new GitRepository("JakeWharton", "nineoldandroids", "https://github.com/JakeWharton/NineOldAndroids"));
         libraries.add(new GitRepository("Trello", "RxLifecycle", "https://github.com/trello/RxLifecycle"));
-        libraries.add(new GitRepository("oxoooo", "mr-mantou-android", "https://github.com/oxoooo/mr-mantou-android"));
+        libraries.add(new GitRepository("OXO", "mr-mantou-android", "https://github.com/oxoooo/mr-mantou-android"));
         libraries.add(new GitRepository("drakeet", "Meizhi", "https://github.com/drakeet/Meizhi"));
         libraries.add(new GitRepository("donglua", "PhotoPicker", "https://github.com/donglua/PhotoPicker"));
         libraries.add(new GitRepository("balysv", "material-ripple", "https://github.com/balysv/material-ripple"));
