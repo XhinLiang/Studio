@@ -9,7 +9,7 @@ import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.studio.bean.GitRepository;
 import com.wecan.xhin.studio.databinding.RecyclerItemHeaderBinding;
 import com.wecan.xhin.studio.databinding.RecyclerItemLibraryBinding;
-import com.wecan.xhin.studio.rx.BindingRecyclerView;
+import com.wecan.xhin.studio.reactivex.BindingRecyclerView;
 
 import java.util.List;
 

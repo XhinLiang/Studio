@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wecan.xhin.studio.R;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.RecyclerItemUserBinding;
-import com.wecan.xhin.studio.rx.BindingRecyclerView;
+import com.wecan.xhin.studio.reactivex.BindingRecyclerView;
 
 public class UsersAdapter extends BindingRecyclerView.ListAdapter<User, UsersAdapter.ViewHolder> {
 

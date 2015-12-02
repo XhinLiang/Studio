@@ -1,5 +1,5 @@
 
-package com.wecan.xhin.studio.rx;
+package com.wecan.xhin.studio.reactivex;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;

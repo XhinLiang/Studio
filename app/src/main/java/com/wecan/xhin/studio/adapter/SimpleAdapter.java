@@ -8,7 +8,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.view.ViewClickEvent;
 import com.wecan.xhin.studio.bean.Simple;
 import com.wecan.xhin.studio.databinding.RecyclerItemSimpleBinding;
-import com.wecan.xhin.studio.rx.BindingRecyclerView;
+import com.wecan.xhin.studio.reactivex.BindingRecyclerView;
 
 import java.util.List;
 
