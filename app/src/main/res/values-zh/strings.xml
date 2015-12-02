@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh">
     <string name="app_name">微客工作室</string>
     <string name="navigation_drawer_open">打开侧边栏</string>
     <string name="navigation_drawer_close">关闭侧边栏</string>
