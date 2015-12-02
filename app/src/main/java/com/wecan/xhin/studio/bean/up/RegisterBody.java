@@ -6,8 +6,8 @@ package com.wecan.xhin.studio.bean.up;
  */
 public class RegisterBody {
 
-    private int position;	/*3*/
-    private int group_name;	/*2*/
+    private int position;
+    private int group_name;
     private int sex;
     private String phone;
     private String name;
