@@ -72,7 +72,6 @@ public class App extends Application {
                 .create();
 
 
-
         //初始化Retrofit
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)

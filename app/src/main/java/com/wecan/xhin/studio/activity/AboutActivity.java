@@ -119,10 +119,10 @@ public class AboutActivity extends BaseActivity implements LibrariesAdapter.List
     }
 
     private void setupRecyclerView(ActivityAboutBinding binding) {
-        libraries.add(new GitRepository(null, "Visit Our Website", null));
-        libraries.add(new GitRepository("Xidian", "Wecan Studio", "http://www.wecanstudio.me"));
-        libraries.add(new GitRepository(null, "Visit GitHub of This App", null));
-        libraries.add(new GitRepository("XhinLiang", "Studio", "https://github.com/XhinLiang/Studio"));
+        libraries.add(new GitRepository(null, getString(R.string.visit_wecan), null));
+        libraries.add(new GitRepository(getString(R.string.xidian_university), getString(R.string.wecan_studio), getString(R.string.wecan_website)));
+        libraries.add(new GitRepository(null, getString(R.string.visit_github), null));
+        libraries.add(new GitRepository(getString(R.string.author), getString(R.string.app_name), getString(R.string.source_code)));
         libraries.add(new GitRepository(null, "Thanks to", null));
         libraries.add(new GitRepository("Square", "Okhttp", "https://square.github.io/okhttp"));
         libraries.add(new GitRepository("Square", "Retrofit", "https://square.github.io/retrofit"));

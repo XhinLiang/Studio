@@ -51,4 +51,11 @@
     <string name="fail">Fail!</string>
     <string name="add_code">Add Code</string>
     <string name="login_fail">Login Fail</string>
+    <string name="visit_wecan">Visit our website</string>
+    <string name="visit_github">Visit GitHub of This App</string>
+    <string name="wecan_studio">Wecan Studio</string>
+    <string name="xidian_university">Xidian University</string>
+    <string name="author">XhinLiang</string>
+    <string name="wecan_website">http://www.wecanstudio.me</string>
+    <string name="source_code">https://github.com/XhinLiang/Studio</string>
 </resources>

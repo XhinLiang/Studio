@@ -51,4 +51,12 @@
     <string name="fail">失败</string>
     <string name="add_code">添加邀请码</string>
     <string name="login_fail">登录出错</string>
+    <string name="visit_wecan">访问微客工作室</string>
+    <string name="visit_github">访问本项目的源代码</string>
+    <string name="wecan_studio">微客工作室</string>
+    <string name="xidian_university">西安电子科技大学</string>
+    <string name="author">XhinLiang</string>
+    <string name="wecan_website">http://www.wecanstudio.me</string>
+    <string name="source_code">https://github.com/XhinLiang/Studio</string>
+
 </resources>
