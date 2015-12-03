@@ -17,6 +17,9 @@ import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityLoginBinding;
 
+import java.io.IOException;
+
+import retrofit.HttpException;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -92,6 +95,16 @@ public class LoginActivity extends BaseActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+
+                        //事实上在code != 200 的时候 , 可以获取响应的body.
+                        if (throwable instanceof HttpException){
+                            try {
+                                showSimpleDialog(R.string.login_fail, ((HttpException) throwable).response().errorBody().string());
+                            } catch (IOException e) {
+                                showSimpleDialog(R.string.login_fail,throwable.getMessage());
+                            }
+                            return;
+                        }
                         showSimpleDialog(R.string.login_fail,throwable.getMessage());
                     }
                 });
