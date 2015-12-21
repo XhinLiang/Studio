@@ -32,9 +32,12 @@ public class LoginActivity extends BaseActivity {
     private Observable<User> observableConnect;
     private Api api;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         setSupportActionBar(binding.toolbar);
         api = App.from(this).createApi(Api.class);
@@ -95,17 +98,16 @@ public class LoginActivity extends BaseActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-
                         //事实上在code != 200 的时候 , 可以获取响应的body.
-                        if (throwable instanceof HttpException){
+                        if (throwable instanceof HttpException) {
                             try {
                                 showSimpleDialog(R.string.login_fail, ((HttpException) throwable).response().errorBody().string());
                             } catch (IOException e) {
-                                showSimpleDialog(R.string.login_fail,throwable.getMessage());
+                                showSimpleDialog(R.string.login_fail, throwable.getMessage());
                             }
                             return;
                         }
-                        showSimpleDialog(R.string.login_fail,throwable.getMessage());
+                        showSimpleDialog(R.string.login_fail, throwable.getMessage());
                     }
                 });
     }

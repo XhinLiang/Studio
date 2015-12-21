@@ -19,10 +19,6 @@
 
 package com.wecan.xhin.studio.bean.down;
 
-/**
- * Created by drakeet on 8/9/15.
- * drakeet
- */
 public class BaseData {
     public int status;
     public String message;

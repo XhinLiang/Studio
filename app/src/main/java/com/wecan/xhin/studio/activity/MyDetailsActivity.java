@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
@@ -27,6 +29,9 @@ import com.wecan.xhin.studio.api.Api;
 import com.wecan.xhin.studio.bean.common.User;
 import com.wecan.xhin.studio.databinding.ActivityUserDetailsBinding;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import me.iwf.photopicker.PhotoPickerActivity;
@@ -243,21 +248,38 @@ public class MyDetailsActivity extends BaseActivity {
                 .show();
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK || requestCode != REQUEST_FOR_SELECT_PICTURE || data == null)
             return;
 
+        //因为设置了PhotoPicker只能选择一个图片，所以这里只选取List的第一个元素
         String photo = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS).get(0);
+        //这一段IO处理事实上是耗时的，但又没有到达需要加上等待动画的地步
         Observable.just(photo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(new Func1<String, AVFile>() {
+                .map(new Func1<String, File>() {
                     @Override
-                    public AVFile call(String s) {
+                    public File call(String filePath) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(filePath, new BitmapFactory.Options());
+                        String uploadName = String.format("avatar_%s_%d", user.name, System.currentTimeMillis());
+                        File file = new File(getFilesDir().getAbsolutePath(), uploadName);
                         try {
-                            return AVFile.withAbsoluteLocalPath(String.format("avatar_%s_%d.jpg", user.name, System.currentTimeMillis()), s);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, new FileOutputStream(file));
+                        } catch (FileNotFoundException e) {
+                            return null;
+                        } finally {
+                            bitmap.recycle();
+                        }
+                        return file;
+                    }
+                })
+                .map(new Func1<File, AVFile>() {
+                    @Override
+                    public AVFile call(File compressFile) {
+                        try {
+                            return AVFile.withFile(compressFile.getName(),compressFile);
                         } catch (IOException e) {
                             return null;
                         }
@@ -274,17 +296,19 @@ public class MyDetailsActivity extends BaseActivity {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
+                        //这里用了RxLifeCycle来管理Subscription
                 .compose(this.<AVFile>bindToLifecycle())
                 .subscribe(new Action1<AVFile>() {
                     @Override
                     public void call(final AVFile file) {
                         final ProgressDialog pd = new ProgressDialog(MyDetailsActivity.this);
+                        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         pd.setMax(100);
                         pd.show();
                         file.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(AVException e) {
-                                pd.hide();
+                                pd.dismiss();
                                 if (e != null) {
                                     showSimpleDialog(R.string.error);
                                     return;

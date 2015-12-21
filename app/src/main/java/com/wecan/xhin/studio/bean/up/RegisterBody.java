@@ -15,7 +15,6 @@ public class RegisterBody {
     private String code;
     private String description;
 
-
     public RegisterBody(int position, int group_name, String phone, int sex, String name, String code) {
         this.position = position;
         this.group_name = group_name;

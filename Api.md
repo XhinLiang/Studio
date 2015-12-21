@@ -39,7 +39,7 @@ phone | string | 密码
 #####请求示例
 
 ```
-GET /api/user?name=xxx&phone=xxx
+GET /api/users?name=xxx&phone=xxx
 ```
 
 ##### 响应示例
@@ -245,10 +245,7 @@ name | string | 类型名称
 #### 请求示例
 
 ```
-POST /api/sign
-{
-	"name" : "wer123"
-}
+DELETE /api/sign?name=xxx
 ```
 
 #### 响应示例
