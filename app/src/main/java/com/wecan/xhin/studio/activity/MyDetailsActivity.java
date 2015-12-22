@@ -262,11 +262,11 @@ public class MyDetailsActivity extends BaseActivity {
                 .map(new Func1<String, File>() {
                     @Override
                     public File call(String filePath) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(filePath, new BitmapFactory.Options());
+                        Bitmap bitmap = compressImageByPixel(filePath, 1000);
                         String uploadName = String.format("avatar_%s_%d", user.name, System.currentTimeMillis());
                         File file = new File(getFilesDir().getAbsolutePath(), uploadName);
                         try {
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, new FileOutputStream(file));
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
                         } catch (FileNotFoundException e) {
                             return null;
                         } finally {
@@ -279,7 +279,7 @@ public class MyDetailsActivity extends BaseActivity {
                     @Override
                     public AVFile call(File compressFile) {
                         try {
-                            return AVFile.withFile(compressFile.getName(),compressFile);
+                            return AVFile.withFile(compressFile.getName(), compressFile);
                         } catch (IOException e) {
                             return null;
                         }
@@ -296,8 +296,7 @@ public class MyDetailsActivity extends BaseActivity {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                        //这里用了RxLifeCycle来管理Subscription
-                .compose(this.<AVFile>bindToLifecycle())
+                .compose(this.<AVFile>bindToLifecycle())//这里用了RxLifeCycle来管理Subscription
                 .subscribe(new Action1<AVFile>() {
                     @Override
                     public void call(final AVFile file) {
@@ -310,7 +309,7 @@ public class MyDetailsActivity extends BaseActivity {
                             public void done(AVException e) {
                                 pd.dismiss();
                                 if (e != null) {
-                                    showSimpleDialog(R.string.error);
+                                    showSimpleDialog(R.string.error, e.getMessage());
                                     return;
                                 }
                                 user.imgurl = file.getUrl();
@@ -324,5 +323,24 @@ public class MyDetailsActivity extends BaseActivity {
                         });
                     }
                 });
+    }
+
+    public Bitmap compressImageByPixel(String imgPath, int maxSize) {
+        BitmapFactory.Options newOpts = new BitmapFactory.Options();
+        newOpts.inJustDecodeBounds = true;//只读边,不读内容
+        BitmapFactory.decodeFile(imgPath, newOpts);
+        newOpts.inJustDecodeBounds = false;
+        int be = 1;
+        //缩放比,用高或者宽其中较大的一个数据进行计算
+        if (newOpts.outWidth > newOpts.outHeight && newOpts.outWidth > maxSize) {
+            be = newOpts.outWidth / maxSize;
+        }
+        if (newOpts.outWidth < newOpts.outHeight && newOpts.outWidth > maxSize) {
+            be = newOpts.outHeight / maxSize;
+        }
+        be++;
+        newOpts.inSampleSize = be;//设置采样率
+
+        return BitmapFactory.decodeFile(imgPath, newOpts);
     }
 }
