@@ -5,7 +5,6 @@
 微客工作室 for Android.
 
 ## Libraries
-<<<<<<< HEAD
 - [OkHttp](https://square.github.io/okhttp)
 - [Retrofit](https://square.github.io/retrofit)
 - [Gson](https://github.com/google/gson)
@@ -18,20 +17,6 @@
 - [Meizhi](https://github.com/drakeet/Meizhi)
 - [PhotoPicker](https://github.com/donglua/PhotoPicker)
 - [material-ripple](https://github.com/balysv/material-ripple)
-=======
-[OkHttp](https://square.github.io/okhttp)
-[Retrofit](https://square.github.io/retrofit)
-[Gson](https://github.com/google/gson)
-[RxJava](https://github.com/ReactiveX/RxJava)
-[RxAndroid](https://github.com/ReactiveX/RxAndroid)
-[RxBinding](https://github.com/JakeWharton/RxBinding)
-[NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
-[RxLifecycle](https://github.com/trello/RxLifecycle)
-[mr-mantou-android](https://github.com/oxoooo/mr-mantou-android)
-[Meizhi](https://github.com/drakeet/Meizhi)
-[PhotoPicker](https://github.com/donglua/PhotoPicker)
-[material-ripple](https://github.com/balysv/material-ripple)
->>>>>>> 96bccc11f1423247a2b1a71e78d19d69989619b7
 
 ## License
 
@@ -49,7 +34,4 @@
     See the License for the specific language governing permissions and
     limitations under the License.
     
-<<<<<<< HEAD
 
-=======
->>>>>>> 96bccc11f1423247a2b1a71e78d19d69989619b7
