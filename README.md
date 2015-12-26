@@ -4,7 +4,7 @@ Studio
 ## Description
 微客工作室 for Android.
 
-## Libraries
+## Thanks
 - [OkHttp](https://square.github.io/okhttp)
 - [Retrofit](https://square.github.io/retrofit)
 - [Gson](https://github.com/google/gson)
