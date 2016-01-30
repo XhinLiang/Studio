@@ -330,16 +330,16 @@ public class MyDetailsActivity extends BaseActivity {
         newOpts.inJustDecodeBounds = true;//只读边,不读内容
         BitmapFactory.decodeFile(imgPath, newOpts);
         newOpts.inJustDecodeBounds = false;
-        int be = 1;
+        int scale = 1;
         //缩放比,用高或者宽其中较大的一个数据进行计算
         if (newOpts.outWidth > newOpts.outHeight && newOpts.outWidth > maxSize) {
-            be = newOpts.outWidth / maxSize;
+            scale = newOpts.outWidth / maxSize;
         }
         if (newOpts.outWidth < newOpts.outHeight && newOpts.outWidth > maxSize) {
-            be = newOpts.outHeight / maxSize;
+            scale = newOpts.outHeight / maxSize;
         }
-        be++;
-        newOpts.inSampleSize = be;//设置采样率
+        scale++;
+        newOpts.inSampleSize = scale;//设置采样率
 
         return BitmapFactory.decodeFile(imgPath, newOpts);
     }

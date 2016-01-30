@@ -14,6 +14,7 @@ import com.wecan.xhin.baselib.R;
 
 import java.util.concurrent.TimeUnit;
 
+import rx.Observable;
 import rx.functions.Func1;
 
 /**
@@ -30,7 +31,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     }
 
 
-    public rx.Observable<ViewClickEvent> setRxClick(View view) {
+    public Observable<ViewClickEvent> setRxClick(View view) {
         return RxView.clickEvents(view)
                 .throttleFirst(500, TimeUnit.MILLISECONDS);
     }
