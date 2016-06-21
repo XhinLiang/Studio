@@ -14,7 +14,6 @@
 8. <a href="#tag/classify">给一个 Tag 做分类</a>
 9. <a href="#tag/cite">增加一次引用次数</a>
 10. <a href="#category/create">根据引用次数查看 Tags </a>
-
 11. <a href="#category/create">新建 Category </a>
 12. <a href="#category/alter">修改 Category </a>
 13. <a href="#category/id">根据id 查看 Category </a>
