@@ -4,9 +4,22 @@
 
 基地址 [tag-system.webdev.com](tag-system.webdev.com)
 
-1. [新建 Tag](#tag_create)
-2. [修改 Tag](#tag_alter)
+1. [新建 Tag](#tag/create)
+2. [修改 Tag](#tag/alter)
+3. <a href="#tag/id">根据 id 查看 Tag </a>
+4. <a href="#tag/page">分页查看 Tags </a>
+5. <a href="#tag/name">根据名字查看 Tag </a>
+6. <a href="#tag/standard">根据标准 id 查看 Tags </a>
+7. <a href="#tag/delete">根据 id 删除 Tag </a>
+8. <a href="#tag/classify">给一个 Tag 做分类</a>
+9. <a href="#tag/cite">增加一次引用次数</a>
+10. <a href="#category/create">根据引用次数查看 Tags </a>
 
+11. <a href="#category/create">新建 Category </a>
+12. <a href="#category/alter">修改 Category </a>
+13. <a href="#category/id">根据id 查看 Category </a>
+14. <a href="#category/page">分页查看 Categories </a>
+15. <a href="#category/name">根据名字查看 Category </a>
 
 ### 响应示例
 ```
@@ -37,7 +50,7 @@
   - `timestamp`
 - `data` 请求返回的主体，根据不同的接口，有不同的实现
 
-<a name="tag_create" />
+<a name="tag/create" />
 ### 新建 Tag
 
 `POST /tag/create`
@@ -80,7 +93,7 @@ POST /tag/create
 }
 ```
 
-<a name="tag_alter" />
+<a name="tag/alter" />
 ### 修改 Tag
 
 `POST /tag/alter`
@@ -126,7 +139,7 @@ Fid=51&Fname=wefwefwefcxvxcvxcvfd
 }
 ```
 
-<a name="tag_id" />
+<a name="tag/id" />
 ### 根据 id 查看 Tag
 
 `GET /tag/id/{Fid}`
@@ -182,7 +195,7 @@ GET /tag/id/51
 }
 ```
 
-<a name="tag_page" />
+<a name="tag/page" />
 ### 分页查看 Tags
 
 `GET /tag/page/{limit}/{page}`
@@ -241,7 +254,7 @@ GET /tag/page/1
 }
 ```
 
-<a name="tag_rank" />
+<a name="tag/rank" />
 ### 根据引用次数分页查看 Tags
 
 `GET /tag/rank/{limit}/{page}`
@@ -300,7 +313,7 @@ GET /tag/rank/1
 }
 ```
 
-<a name="tag_standard" />
+<a name="tag/standard" />
 ### 根据标准 id 查看 Tags
 
 `GET /tag/standard/{Fstandard_id}`
@@ -358,7 +371,7 @@ GET /tag/standard/50
 }
 ```
 
-<a name="tag_delete" />
+<a name="tag/delete" />
 ### 删除 Tag
 
 `GET /tag/delete/{Fid}`
@@ -390,7 +403,7 @@ GET /tag/delete/51
 }
 ```
 
-<a name="tag_name" />
+<a name="tag/name" />
 ### 根据名字查看 Tag
 
 `GET /tag/name/{Fname}`
@@ -446,7 +459,7 @@ GET /tag/name/赫尔额
 }
 ```
 
-<a name="tag_category" />
+<a name="tag/category" />
 ### 根据分类查看 Tags
 
 `GET /tag/category/{Fname}`
@@ -504,7 +517,7 @@ GET /tag/category/威锋网
 }
 ```
 
-<a name="tag_cite" />
+<a name="tag/ccite" />
 ### 给 Tag 增加一次引用计数
 
 `GET /tag/cite/{Fid}`
@@ -539,7 +552,7 @@ GET /tag/cite/51
 ```
 
 
-<a name="category_create" />
+<a name="category/create" />
 ### 新建 Category
 
 `POST /category/create`
@@ -574,7 +587,7 @@ POST /category/create
 }
 ```
 
-<a name="category_alter" />
+<a name="category/alter" />
 ### 修改 Tag
 
 `POST /category/alter`
@@ -612,7 +625,7 @@ Fid=51&Fname=wefwefwefcxvxcvxcvfd
 }
 ```
 
-<a name="category_id" />
+<a name="category/id" />
 ### 根据 id 查看 Category
 
 `GET /category/id/{Fid}`
@@ -650,7 +663,7 @@ GET /category/id/51
 }
 ```
 
-<a name="category_page" />
+<a name="category/page" />
 ### 分页查看 Categories
 
 `GET /category/page/{limit}/{page}`
@@ -691,7 +704,7 @@ GET /category/page/1
 }
 ```
 
-<a name="category_delete" />
+<a name="category/delete" />
 ### 删除 Tag
 
 `GET /category/delete/{Fid}`
@@ -723,7 +736,7 @@ GET /category/delete/51
 }
 ```
 
-<a name="category_name" />
+<a name="category/name" />
 ### 根据名字查看 Category
 
 `GET /category/name/{Fname}`
