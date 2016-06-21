@@ -6,19 +6,19 @@
 
 1. [新建 Tag](#tag/create)
 2. [修改 Tag](#tag/alter)
-3. <a href="#tag/id">根据 id 查看 Tag </a>
-4. <a href="#tag/page">分页查看 Tags </a>
-5. <a href="#tag/name">根据名字查看 Tag </a>
-6. <a href="#tag/standard">根据标准 id 查看 Tags </a>
-7. <a href="#tag/delete">根据 id 删除 Tag </a>
-8. <a href="#tag/classify">给一个 Tag 做分类</a>
-9. <a href="#tag/cite">增加一次引用次数</a>
-10. <a href="#category/create">根据引用次数查看 Tags </a>
-11. <a href="#category/create">新建 Category </a>
-12. <a href="#category/alter">修改 Category </a>
-13. <a href="#category/id">根据id 查看 Category </a>
-14. <a href="#category/page">分页查看 Categories </a>
-15. <a href="#category/name">根据名字查看 Category </a>
+3. [根据 id 查看 Tag](#tag/id)
+4. [分页查看 Tags](#tag/page)
+5. [根据名字查看 Tag](#tag/name)
+6. [根据标准 id 查看 Tags](#tag/standard)
+7. [根据 id 删除 Tag](#tag/delete)
+8. [给一个 Tag 做分类](#tag/classify)
+9. [增加一次引用次数](#tag/cite)
+10. [根据引用次数查看 Tags](#tag/rank)
+11. [新建 Category](#category/create)
+12. [修改 Category](#category/alter)
+13. [根据id 查看 Category](#category/id)
+14. [分页查看 Categories](#category/page)
+15. [根据名字查看 Category](#category/name)
 
 ### 响应示例
 ```
@@ -516,7 +516,7 @@ GET /tag/category/威锋网
 }
 ```
 
-<a name="tag/ccite" />
+<a name="tag/cite" />
 ### 给 Tag 增加一次引用计数
 
 `GET /tag/cite/{Fid}`
