@@ -117,7 +117,7 @@ Fupdated_by | string | 标签修改者 | 否
 
 #### 请求示例
 
-``` json
+```
 POST /tag/alter
 
 Fid=51&Fname=wefwefwefcxvxcvxcvfd
@@ -125,7 +125,7 @@ Fid=51&Fname=wefwefwefcxvxcvxcvfd
 
 #### 响应示例
 
-``` json
+```
 200 OK
 {
     "response": {
@@ -151,13 +151,13 @@ Fid | int | 标签id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /tag/id/51
 ```
 
 #### 响应示例
 
-``` json
+```
 {
     response: {
         code: 0,
@@ -208,13 +208,13 @@ limit | int | 每页tags数 | 否（默认20）
 
 #### 请求示例
 
-``` json
+```
 GET /tag/page/1
 ```
 
 #### 响应示例
 
-``` json 
+``` 
 {
     response: {
         code: 0,
@@ -267,13 +267,13 @@ limit | int | 每页tags数 | 否（默认20）
 
 #### 请求示例
 
-``` json
+```
 GET /tag/rank/1
 ```
 
 #### 响应示例
 
-``` json 
+``` 
 {
     response: {
         code: 0,
@@ -325,13 +325,13 @@ Fstandard_id | int | 标准id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /tag/standard/50
 ```
 
 #### 响应示例
 
-``` json
+```
 {
     response: {
         code: 0,
@@ -383,13 +383,13 @@ Fid | int | 标签id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /tag/delete/51
 ```
 
 #### 响应示例
 
-``` json
+```
 200 OK
 {
     "response": {
@@ -415,13 +415,13 @@ Fname | text | 标签名字 | 是
 
 #### 请求示例 
 
-``` json
+```
 GET /tag/name/赫尔额 
 ```
 
 #### 响应示例
 
-``` json 
+``` 
 {
     response: {
         code: 0,
@@ -471,13 +471,13 @@ Fname | text | 分类名 | 是
 
 #### 请求示例 
 
-``` json
+```
 GET /tag/category/威锋网
 ```
 
 #### 响应示例 
 
-``` json 
+``` 
 {
     response: {
         code: 0,
@@ -531,13 +531,13 @@ Fid | int | 标签id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /tag/cite/51
 ```
 
 #### 响应示例
 
-``` json
+```
 200 OK
 {
     "response": {
@@ -581,7 +581,7 @@ POST /category/create
 		"message": "OK"
 		"cost": 12
 		"timestamp": 1465983198000
-	}-
+	}
 	"data": null
 }
 ```
@@ -603,7 +603,7 @@ Fupdated_by | string | 标签修改者 | 否
 
 #### 请求示例
 
-``` json
+```
 POST /category/alter
 
 Fid=51&Fname=wefwefwefcxvxcvxcvfd
@@ -611,7 +611,7 @@ Fid=51&Fname=wefwefwefcxvxcvxcvfd
 
 #### 响应示例
 
-``` json
+```
 200 OK
 {
     "response": {
@@ -637,13 +637,13 @@ Fid | int | 标签id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /category/id/51
 ```
 
 #### 响应示例
 
-``` json
+```
 {
     response: {
         code: 0,
@@ -676,13 +676,13 @@ limit | int | 每页tags数 | 否（默认20）
 
 #### 请求示例
 
-``` json
+```
 GET /category/page/1
 ```
 
 #### 响应示例
 
-``` json 
+``` 
 {
     response: {
         code: 0,
@@ -716,13 +716,13 @@ Fid | int | 标签id | 是
 
 #### 请求示例
 
-``` json
+```
 GET /category/delete/51
 ```
 
 #### 响应示例
 
-``` json
+```
 200 OK
 {
     "response": {
@@ -748,13 +748,13 @@ Fname | text | 分类名字 | 是
 
 #### 请求示例 
 
-``` json
+```
 GET /category/name/威锋网
 ```
 
 #### 响应示例
 
-``` json 
+``` 
 {
     response: {
         code: 0,
